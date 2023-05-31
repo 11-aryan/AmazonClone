@@ -12,7 +12,7 @@ npm-debug.log
 yarn-error.log
 
 
-/assets
+src/assets
 
 # IDEs and editors
 .idea/
