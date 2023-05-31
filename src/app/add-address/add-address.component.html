@@ -1,0 +1,117 @@
+
+<h4 id="addAddressHeading"> Add a new Address </h4>
+
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit(addressForm.value)" class="addressForm">
+
+    <div class="field">
+
+        <div class="row">
+            <label for="country"> <b> Country </b> </label>
+            <input class="form-control" type="country" id="country" formControlName="country"
+                [ngClass]="{ 'is-invalid': (f['country'].touched || submitted) && f['country'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['country'].untouched && !submitted) || f['country'].valid}">
+                <small class="text-danger" *ngIf="f['country'].errors?.['required']">
+                    Country Cannot be blank
+                </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="fullName"> <b> fullName </b> </label>
+            <input class="form-control" type="fullName" id="fullName" formControlName="fullName"
+                [ngClass]="{ 'is-invalid': (f['fullName'].touched || submitted) && f['fullName'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['fullName'].untouched && !submitted) || f['fullName'].valid}">
+                <small class="text-danger" *ngIf="f['fullName'].errors?.['required']">
+                    fullName Cannot be blank
+                </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="mobileNumber"> <b> mobileNumber </b> </label>
+            <input class="form-control" type="mobileNumber" id="mobileNumber" formControlName="mobileNumber"
+                [ngClass]="{ 'is-invalid': (f['mobileNumber'].touched || submitted) && f['mobileNumber'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['mobileNumber'].untouched && !submitted) || f['mobileNumber'].valid}">
+                <small class="text-danger" *ngIf="f['mobileNumber'].errors?.['required']">
+                    mobileNumber Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="pincode"> <b> pincode </b> </label>
+            <input class="form-control" type="pincode" id="pincode" formControlName="pincode"
+                [ngClass]="{ 'is-invalid': (f['pincode'].touched || submitted) && f['pincode'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['pincode'].untouched && !submitted) || f['pincode'].valid}">
+                <small class="text-danger" *ngIf="f['pincode'].errors?.['required']">
+                    pincode Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="line1"> <b> line1 </b> </label>
+            <input class="form-control" type="line1" id="line1" formControlName="line1"
+                [ngClass]="{ 'is-invalid': (f['line1'].touched || submitted) && f['line1'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['line1'].untouched && !submitted) || f['line1'].valid}">
+                <small class="text-danger" *ngIf="f['line1'].errors?.['required']">
+                    line1 Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="line2"> <b> line2 </b> </label>
+            <input class="form-control" type="line2" id="line2" formControlName="line2"
+                [ngClass]="{ 'is-invalid': (f['line2'].touched || submitted) && f['line2'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['line2'].untouched && !submitted) || f['line2'].valid}">
+                <small class="text-danger" *ngIf="f['line2'].errors?.['required']">
+                    line2 Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="landmark"> <b> landmark </b> </label>
+            <input class="form-control" type="landmark" id="landmark" formControlName="landmark"
+                [ngClass]="{ 'is-invalid': (f['landmark'].touched || submitted) && f['landmark'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['landmark'].untouched && !submitted) || f['landmark'].valid}">
+                <small class="text-danger" *ngIf="f['landmark'].errors?.['required']">
+                    landmark Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="city"> <b> city </b> </label>
+            <input class="form-control" type="city" id="city" formControlName="city"
+                [ngClass]="{ 'is-invalid': (f['city'].touched || submitted) && f['city'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['city'].untouched && !submitted) || f['city'].valid}">
+                <small class="text-danger" *ngIf="f['city'].errors?.['required']">
+                    city Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="state"> <b> state </b> </label>
+            <input class="form-control" type="state" id="state" formControlName="state"
+                [ngClass]="{ 'is-invalid': (f['state'].touched || submitted) && f['state'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['state'].untouched && !submitted) || f['state'].valid}">
+                <small class="text-danger" *ngIf="f['state'].errors?.['required']">
+                    state Cannot be blank
+                </small>
+            </div>
+        </div>
+        
+    </div>
+
+    <button id="addAddressBtn" class="btn btn-warning my-5" type="submit">Add Address</button>
+
+</form>

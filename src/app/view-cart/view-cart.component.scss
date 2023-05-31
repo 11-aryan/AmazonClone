@@ -1,0 +1,98 @@
+#emptyCart {
+    height: 400px;
+    background-color: grey;
+}
+
+.viewCartContainer {
+    width: 100%;
+    height: auto;
+    min-height: 1500px;
+    background-color: #EAEDED;
+}
+
+#emptyCartContainer {
+    margin: 2% 0 0 2%;
+    background-color: white;
+}
+
+#emptyCartHeading{
+    margin-top: 5%;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+#emptyCartImg {
+    height: 400px;
+    width: 500px;
+}
+
+#signinBtn {
+    // background-color: #F9D713;
+    // height: 30px;
+    border-radius: 10px;
+}
+
+.accoutActionsBtn {
+    margin-top: 2%;
+}
+
+#signupBtn {
+    border-radius: 10px;
+    background-color: white;
+    border-style: solid;
+    border-color: rgb(192, 190, 190);
+    margin: 0 0 0 1%;
+}
+
+#signupBtn:hover {
+    background-color: rgb(243, 252, 249);
+}
+
+#cartItems {
+    background-color: white;
+    margin: 2% 0 0 2%;
+    height: auto;
+}
+
+#productName {
+    text-align: left;
+}
+
+#quantity {
+    width: 60px; 
+    height: 30px;
+    border-radius: 7px;
+    margin: 0 0 0 1%;
+}
+
+#removeFromCartBtn {
+    text-decoration: underline;
+    color: blue;
+}
+#removeFromCartBtn:hover {
+    color: rgb(5, 5, 150);
+    cursor: pointer;
+}
+
+#proceedToBuy {
+    margin: 2% 0 0 1%;
+    overflow: visible;
+    background-color: white;
+}
+
+#selectedForBuying {
+    margin: 0 1% 0 5%;
+    height: 20px;
+    width: 20px;
+}
+
+#proceedToBuyBtn {
+    width: 100%;
+    border-radius: 10px;
+    margin: 2% 0 0 0;
+}
+
+#productImage {
+    height: 150px;
+    width: 430px;
+}

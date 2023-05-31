@@ -1,0 +1,144 @@
+<app-banner-for-sellers></app-banner-for-sellers>
+
+<form [formGroup]="updateProductForm" (ngSubmit)="onSubmit(updateProductForm.value)" class="addProductForm">
+
+    <div class="addProductHeading">
+        <h4>Update Product Details</h4>
+    </div>
+
+    <div class="field">
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="productName"> <b> Product Name </b> </label>
+                <input class="form-control" type="text" id="productName" formControlName="productName"
+                    [ngClass]="{ 'is-invalid': (f['productName'].touched || submitted)&& f['productName'].invalid }">
+
+                <div [ngClass]="{ 'd-none': (f['productName'].untouched && !submitted) || f['productName'].valid}">
+                    <small class="text-danger" *ngIf="f['productName'].errors?.['required']">
+                        product Name Cannot be blank
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="aboutProduct"> <b> About Product </b> </label>
+                <textarea class="form-control" type="text" id="aboutProduct" formControlName="aboutProduct"
+                    [ngClass]="{ 'is-invalid': (f['aboutProduct'].touched || submitted)&& f['aboutProduct'].invalid }">
+                </textarea>
+
+                <div [ngClass]="{ 'd-none': (f['aboutProduct'].untouched && !submitted) || f['aboutProduct'].valid}">
+                    <small class="text-danger" *ngIf="f['aboutProduct'].errors?.['required']">
+                        about Product Cannot be blank
+                    </small>   
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="brand"> <b> Brand </b> </label>
+                <input class="form-control" type="text" id="brand" formControlName="brand"
+                    [ngClass]="{ 'is-invalid': (f['brand'].touched || submitted)&& f['brand'].invalid }">
+
+                <div [ngClass]="{ 'd-none': (f['brand'].untouched && !submitted) || f['brand'].valid}">
+                    <small class="text-danger" *ngIf="f['brand'].errors?.['required']">
+                        brand Cannot be blank
+                    </small>   
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin:3% 0 3% 0;">
+            <div class="col" style=" padding: 0;">
+                <label for="aboutProduct"> <b> Enter Product Categories </b> </label>
+                <ng-multiselect-dropdown 
+                    formControlName="productCategories"
+                    [(ngModel)]="selectedCategories" 
+                    [placeholder]="'Enter product categories'"
+                    [settings]="dropdownSettings"
+                    [data]="dropdownList"
+                    (onSelect)="onItemSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="maxRetailPrice"> <b> Enter Max Retail Price </b> </label>
+                <input class="form-control" type="number" id="maxRetailPrice" formControlName="maxRetailPrice"
+                    [ngClass]="{ 'is-invalid': (f['maxRetailPrice'].touched || submitted)&& f['maxRetailPrice'].invalid }">
+
+                <div
+                    [ngClass]="{ 'd-none': (f['maxRetailPrice'].touched==false && !submitted) || f['maxRetailPrice'].valid}">
+                    <small class="text-danger" *ngIf="f['maxRetailPrice'].errors?.['required']">
+                        Max Retail Price Cannot be blank
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="sellingPrice"> <b> Enter Selling Price </b> </label>
+                <input class="form-control" type="number" id="sellingPrice" formControlName="sellingPrice"
+                    [ngClass]="{ 'is-invalid': (f['sellingPrice'].touched || submitted)&& f['sellingPrice'].invalid }">
+
+                <div
+                    [ngClass]="{ 'd-none': (f['sellingPrice'].touched==false && !submitted) || f['sellingPrice'].valid}">
+                    <small class="text-danger" *ngIf="f['sellingPrice'].errors?.['required']">
+                        Selling Price Cannot be blank
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="quantity"> <b> Enter Product Quantity </b> </label>
+                <input class="form-control" type="number" id="quantity" formControlName="quantity"
+                    [ngClass]="{ 'is-invalid': (f['quantity'].touched || submitted)&& f['quantity'].invalid }">
+
+                <div [ngClass]="{ 'd-none': (f['quantity'].touched==false && !submitted) || f['quantity'].valid}">
+                    <small class="text-danger" *ngIf="f['quantity'].errors?.['required']">
+                        Selling Price Cannot be blank
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col my-2" style=" padding: 0;">
+                <label for="productImages"> <b> Upload Product Images </b> </label>
+                <br>
+                <input type="file" id="files" name="files" multiple (change)="onFileChange($event)">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" 
+                *ngFor="let strImg of productImages; let id = index" 
+                id="uploadedImagesContainer"
+            >
+                <img class="uploadedImage" 
+                    src="data:image/jpeg;base64,{{strImg}}" 
+                    alt=""
+                    accept=".jpeg,.png,.jpg"
+                >
+                <span id="removeImageText" (click)="removeImage(id)">Remove Image</span>
+            </div>
+        </div>
+        
+
+        <button id="submitBtn" class="btn btn-warning my-5" type="submit">Update Product</button>
+    </div>
+
+
+</form>
+
+

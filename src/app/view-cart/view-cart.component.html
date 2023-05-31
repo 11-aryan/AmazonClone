@@ -1,0 +1,72 @@
+<app-banner></app-banner>
+
+<div class="viewCartContainer">
+
+    <div class="container m-0">
+        <div class="row">
+            <div id="emptyCartContainer" class="col-10" [ngClass]="{'d-none': numProductsInCart>0}">
+                <img align="left" id="emptyCartImg" src="../../assets/Images/emptyCart.svg" alt="">
+                <h3 id="emptyCartHeading">Your Amazon Cart is empty</h3>
+                <a href="">Shop today's deals</a>
+                <div *ngIf="!userLoggedIn" class="accoutActionsBtn">
+                    <button id="signinBtn" class="btn btn-warning" [routerLink]="['/signin']">Sign in to your
+                        account</button>
+                    <button id="signupBtn" class="btn btn-light" [routerLink]="['/signup']">Sign up now</button>
+                </div>
+            </div>
+
+            <div id="cartItems" class="col-10" [ngClass]="{'d-none': numProductsInCart==0}">
+                <h3 style="margin: 2% 0 0 1%;">Shopping Cart</h3>
+                <p style="text-align: right;">Price: </p>
+                <hr>
+                <div *ngFor="let cartItem of cartItems; let id = index">
+                    <form #productForm="ngForm">
+                        <div class="row" style="height: 200px;">
+                            <div class="col-2">
+                                <img  
+                                    id="productImage"
+                                    class="img-fluid"
+                                    src="data:image/jpeg;base64,{{productsInCart[id].productImages[0]}}" 
+                                    accept=".jpeg,.png,.jpg"
+                                    alt=""
+                                >
+                            </div>
+                            <div class="col">
+                                <h4 id="productName">{{productsInCart[id].productName}}</h4>
+                                <!-- <h5>{{productsInCart[id]._id}}</h5> -->
+                                <p id="aboutProduct">{{productsInCart[id].aboutProduct | slice:0:150}}</p>
+                                <p id="removeFromCartBtn" (click)="removeFromCart(cartItem)">Delete</p>
+                                <label for="quantity">Quantity: </label>
+                                <select id="quantity" [(ngModel)]="cartItem.quantityInCart" name="quantity"
+                                    (ngModelChange)="updateQuantity(cartItem)">
+                                    <option *ngFor="let qty of [1, 2, 3, 4, 5]" [selected]="1" [value]="qty">{{qty}}
+                                    </option>
+                                </select>
+
+                                <input type="checkbox" name="selectedForBuying" id="selectedForBuying"
+                                [(ngModel)]="cartItem.selectedForBuying"
+                                (ngModelChange)="updateSelectedForBuying(cartItem)"    
+                                >
+                                <label for="selectedForBuying">Select to Buy</label>
+                            </div>
+                            <div class="col-2">
+                                <h5 style="text-align: right;">{{productsInCart[id].sellingPrice *
+                                    cartItem.quantityInCart | currency: "INR"}}</h5>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="col" id="proceedToBuy">
+                <p> <b>Subtotal</b> {{subTotal | currency : "INR"}} </p>
+                <button id="proceedToBuyBtn" class="btn btn-warning" (click)="checkout()"> Proceed to Buy</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

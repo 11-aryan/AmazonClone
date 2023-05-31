@@ -1,0 +1,28 @@
+<app-banner-for-sellers></app-banner-for-sellers>
+
+<div class="container-fluid">
+    <br><br>
+    <h3 style="font-weight: 500;">Your Listed Products:</h3>
+    <div class="productsContainer" *ngFor="let product of products">
+        <h4>{{product.productName}}</h4>
+        <div class="row">
+            <img class="img-fluid" 
+                id="productImage" 
+                src="data:image/jpeg;base64,{{product.productImages[0]}}" 
+                accept=".jpeg,.png,.jpg"
+                alt=""
+            >
+            <div class="col my-3">
+                <h6>Max Retail Price: </h6> <p>{{product.maxRetailPrice | currency : "INR"}}</p>
+                <h6>Selling Price: </h6> <p>{{product.sellingPrice | currency : "INR"}}</p>
+            </div>
+            <div class="col my-3">
+                <h6>Quantity Available: </h6> <p>{{product.quantity}}</p>
+                <h6>Units Sold: </h6> <p>{{product.unitsSold}}</p>
+            </div>
+            <button class="btn btn-warning my-3" (click)="updateProductDetails(product._id)">Update Product Details</button>
+            <button class="btn btn-secondary" (click)="deleteProduct(product._id)">Remove Product</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img src="../../assets/Images/logo-white.png" width="100" height="30" class="d-inline-block align-top" alt="" style="margin:5px 0 0 20px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Shop by category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <span class="productCategory dropdown-item" (click)="viewProducts('Electronics')"> Electronics </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('Mobile_Phones')"> Mobiles </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('Computers')"> Computers </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('Home')"> Home </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('Fashion')"> Fashion </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('Groceries')"> Groceries </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('All')"> All Products </span>
+          <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a> -->
+        </div>
+      </li>
+
+      <li class="nav-item mx-3">
+        <a class="nav-link" [routerLink]="['/sellerSignin']" >Sell</a>
+      </li>
+      
+      <div class="search-box">
+        <form class="form-inline my-2 my-lg-0" style="width: 100%;">
+          <input class="form-control mr-sm-2" type="text" name="searchTerm" 
+          [(ngModel)]="searchTerm" (input)="search(searchTerm)"
+          placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-1" type="submit">Search</button>
+        </form>
+
+        <table class="searchSuggestions">
+          <tbody>
+            <tr *ngFor="let product of filteredProducts | searchFilter: searchTerm; index as i">
+              <td (click)="viewProductDetails(product._id)">
+                {{ product.productName }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+    </ul>
+    
+    <!-- <div id="signinBtn" class="btn" [routerLink]="['/signin']">Sign In</div>
+    <div id="signupBtn" class="btn" [routerLink]="['/signup']">Sign Up</div> -->
+
+    <div *ngIf="!userLoggedIn" id="accountActionsBtn" class="btn" [routerLink]="['/signup']"> <p> Hello, signin <b> Accounts & Lists </b>  </p> </div>
+    <div *ngIf="userLoggedIn" id="accountActionsBtn" class="btn" [routerLink]="['/customerAccountDetails']"> <p> Hello, {{currentCustomer.firstName}} <b> Accounts & Lists </b>  </p> </div>
+
+    <div id="returnsAndOrdersBtn" class="btn" [routerLink]="['/orders']"> <p> Returns <b> & Orders </b>  </p></div>
+
+    <div class="cartContainer"  [routerLink]="['/viewCart']">
+      <span id="numProductsInCart">{{numProductsInCart}}</span>
+      <img id="cartImage" src="../../assets/Images/cartIcon.png" alt="">
+      <label id="cartLabel" for="">Cart</label>
+    </div>
+  </div>
+</nav>
+
+
+

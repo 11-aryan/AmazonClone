@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img id="logoImg" src="../../assets/Images/logo-black.png" alt=""></a>
+    <h3 id="checkoutHeading"> Checkout </h3>
+</nav>
+
+<div class="container-fluid m-0">
+    <h5>1. Select Delivery Address</h5>
+    <div class="addresses">
+        <div *ngFor="let ad of addresses" 
+            class="addressContainer"
+            id="addressContainer" 
+            (click)="onAddressSelect(ad)"
+            [ngClass]="{'selectedAddress': ad === addressSelected}" 
+        >
+            <input type="radio" id="addressSelected" [checked]="ad === addressSelected">
+                {{ad.fullName}}, {{ad.line1}}, {{ad.line2}}, {{ad.city}}, {{ad.state}}, {{ad.pincode}}, {{ad.country}}, 
+                Phone Number: {{ad.mobileNumber}}
+        </div>
+
+        <p id="addAddressBtn" (click)="addAddress()" >Add a new address</p>
+    </div>
+</div>
+
+<form class="container-fluid my-5" [formGroup]="paymentForm" (ngSubmit)="onSubmitPaymentForm()">
+    <h5>2. Select Payment Method</h5> 
+
+    <div class="paymentMethodContainer" 
+        id="codPayment" 
+        (click)="onSelectPayment('codPayment')"
+        [ngClass]="{'selectedPaymentMethod': paymentMethodSelected == 'codPayment'}" 
+    >
+        <input type="radio" [checked]="paymentMethodSelected === 'codPayment'">
+        <h6>Cash On Delivery</h6>
+    </div>
+
+    <div class="paymentMethodContainer" 
+        id="cardPayment" 
+        (click)="onSelectPayment('cardPayment')"
+        [ngClass]="{'selectedPaymentMethod': paymentMethodSelected == 'cardPayment'}" 
+    >
+        <input type="radio" [checked]="paymentMethodSelected === 'cardPayment'">
+    
+        <h6>Card</h6>
+
+        <div [ngClass]="{ 'd-none': paymentMethodSelected!='cardPayment'}" class="m-0 p-0">
+            <label for="cardNumber">Card Number: </label>
+            <input class="form-control" type="text" formControlName="cardNumber"> 
+    
+            <label for="nameOnCard">Name on Card: </label>
+            <input class="form-control" type="text" formControlName="nameOnCard"> 
+    
+            <div class="row m-0 p-0">
+                <div class="col">
+                    <label for="cardExpiryDate">Expiry Date: </label>
+                    <select class="form-control" name="" id="" formControlName="cardExpiryMonth">
+                        <option value="">Select a Month</option>
+                        <option *ngFor="let month of getMonths()" [ngValue]="month">{{month}}</option>
+                    </select>
+                </div>
+    
+                <div class="col">
+                    <label for="cardExpiryDate">Expiry Year: </label>
+                <select class="form-control" name="" id="" formControlName="cardExpiryYear">
+                    <option value="">Select a Year</option>
+                    <option value="" *ngFor="let year of getYears()" [ngValue]="year">{{year}}</option>
+                </select>
+                </div>
+    
+            </div>
+        </div>
+
+    </div>
+
+    <div 
+        class="paymentMethodContainer" 
+        id="upiPayment" 
+        (click)="onSelectPayment('upiPayment')"
+        [ngClass]="{'selectedPaymentMethod': paymentMethodSelected == 'upiPayment'}" 
+    >
+        <h6>UPI</h6>
+
+        <div [ngClass]="{ 'd-none': paymentMethodSelected!='upiPayment'}">
+            <label for="nameOnCard">Upi Id: </label>
+            <input class="form-control" type="text" formControlName="upiId"> 
+        </div>
+    </div>
+
+    <button id="placeOrder" class="btn btn-warning my-5" type="submit">Place Order</button>
+
+</form>

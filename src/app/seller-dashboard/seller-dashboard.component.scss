@@ -1,0 +1,25 @@
+
+#productImage {
+    height: 250px;
+    width: 300px;
+}
+
+.container-fluid {
+    min-height: 800px;
+    background-color: #dfe3e3;
+}
+
+.productsContainer {
+    height: 450px;
+    width: 1000px;
+    padding: 2%;
+    background-color: white;
+    border-style: solid;
+    border-color: rgb(200, 198, 198);
+    margin: 2% 0 0 0;
+}
+
+
+* {
+    // background-color: green;
+}

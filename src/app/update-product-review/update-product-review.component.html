@@ -1,0 +1,70 @@
+<app-banner></app-banner>
+<div class="reviewForm">
+
+    <h3 style="margin-bottom: 5%;">Edit your Review</h3>
+
+    <div class="row">
+        <div class="col-2">
+            <img float="left" id="productImage" src="../../assets/Images/Products/samsumgbook360.jpeg" alt="" class="img-fluid">
+        </div>
+        <div class="col">
+            <p>{{product.productName}}</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-row">
+            <label for="rating"> <b> Overall Rating </b></label>
+            <select class="form-control" name="" id="" 
+                formControlName="rating"
+                [ngClass]="{ 'is-invalid': submitted && f['rating'].errors }"
+            >
+                <option value="">Select a Rating Value</option>
+                <option value="1" selected> 1 </option>
+                <option value="2"> 2 </option>
+                <option value="3"> 3 </option>
+                <option value="4"> 4 </option>
+                <option value="5"> 5 </option>
+            </select>
+            <div *ngIf="submitted && f['rating'].errors" class="invalid-feedback">
+                <div *ngIf="f['rating'].errors['required']">rating Id is required</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-row">
+            <label for="headline"> <b> Headline </b></label>
+            <input id='headline' type="headline" class="form-control" 
+                formControlName="headline"
+                [ngClass]="{ 'is-invalid': submitted && f['headline'].errors }"
+                placeholder="What's most important to know?"
+            >
+            <div *ngIf="submitted && f['headline'].errors" class="invalid-feedback">
+                <div *ngIf="f['headline'].errors['required']">headline Id is required</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-row">
+            <label for="description"> <b> Add a written review </b></label>
+            <textarea id='description' class="form-control" formControlName="description"
+                [ngClass]="{ 'is-invalid': submitted && f['description'].errors }">
+            </textarea>
+            <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                <div *ngIf="f['description'].errors['required']">description Id is required</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <button id="submitBtn" type="submit" class="btn btn-warning"> Update Review </button>
+
+    </form>
+</div>
+
+

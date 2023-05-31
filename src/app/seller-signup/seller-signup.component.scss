@@ -1,0 +1,48 @@
+.signupForm {
+    margin: 3% 0 5% 30%;
+    width: 40%;
+    padding: 60px 40px 60px 40px; 
+    border-color: black;
+    // border-width: 20px;
+    // background-color: rgb(243, 247, 247);
+    border-style: solid;
+    border-color: rgb(201, 201, 201);
+    border-radius: 10px;
+}
+
+.signupHeading {
+    text-align: center;
+    margin: 3% 0 0 0;
+}
+
+
+#signupH2 {
+    font-size: 25px;
+    margin: 0 0 0 0;
+    font-weight: 400;
+}
+
+.submit {
+    text-align: center;
+}
+
+// .address {
+//     padding: 20px;
+//     margin: 8% 0 0 0;
+//     background-color: rgb(215, 233, 254);
+// }
+
+.submitButton {
+    margin: 5% 0 0 0;
+    text-align: center;
+}
+
+#signupBtn {
+    width: 100%;
+}
+
+#signinAccountBtn {
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(201, 201, 201);
+}

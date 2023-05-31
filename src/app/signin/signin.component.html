@@ -1,0 +1,42 @@
+<div class="container-fluid" style="margin-top: 2%;">
+
+    <div class="signinHeading">
+        <a [routerLink]="['']"> <img src="../../assets/Images/logo-black.png" alt="" [routerLink]="['/home']"> </a> 
+        <h1 id="signinHeading">Sign in</h1>
+    </div>
+
+    <div class="signinForm">
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+
+                <div class="form-row">
+                    <label for="email"> <b> Email Id </b></label>
+                    <input id='email' type="email" class="form-control" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email Id is required</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="password"> <b> Password </b> </label>
+                    <input id='password' type="password" class="form-control" formControlName="password"
+                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <button id="signinBtn" type="submit" class="btn btn-warning">Signin</button>
+        </form>
+
+        <br><br>
+        <span>Don't have an account ? </span>
+        <button id="createAccountBtn" class="btn btn-light my-1"  [routerLink]="['/signup']"> Create an Account </button>
+    </div>
+
+
+</div>

@@ -1,0 +1,110 @@
+
+.product-list {
+    padding: 20px 10px 20px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.product-list>ul {
+    margin: 0 -10px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.product-list>ul>li {
+    width: 25%;
+    padding: 10px;
+}
+
+.white-box {
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4);
+    background-color: #ffffff;
+    padding: 5px 5px;
+    margin: 0 0 5% 0;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+
+.white-box:hover {
+    cursor: pointer;
+}
+
+.wishlist-icon {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+}
+
+.wishlist-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.product-img {
+    min-height: 135px;
+}
+
+.product-img img {
+    max-width: 100%;
+    max-height: 150px; 
+    min-width: 250px;
+    min-height: 230px;
+    display: block;
+    margin: 0 auto;
+}
+
+.product-bottom {
+    text-align: left;
+}
+
+.product-name {
+    font-size: 18px;
+    color: black;
+    text-align: left;
+    // margin: 10px 0 2px;
+    font-weight: 530;
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.product-name:hover {
+    color: orangered;
+    cursor: pointer;
+}
+
+
+
+
+#ratingStar {
+    height: 16px;
+    width: 16px;
+}
+
+
+#sellingPrice {
+    font-weight: 900px;
+    margin: 5% 0 0 0;
+    font-size: 25px;
+    // font-family: Arial, Helvetica, sans-serif;
+}
+
+#maxRetailPrice {
+    text-decoration: line-through;
+    color: grey;
+    font-size: 15px;
+}
+
+#discount {
+    color: black;
+    margin: 0 0 0 1%;
+}
+
+#sortType {
+    height: 25px;
+    width: 120px;
+    // background-color: red;
+    border-radius: 8px;
+    margin: 1% 0 0 1%;
+    // left: 800px;
+}
+

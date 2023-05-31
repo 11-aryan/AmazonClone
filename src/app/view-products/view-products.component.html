@@ -1,0 +1,84 @@
+<app-banner></app-banner>
+
+<div class="container-fluid">
+    <div class="row-1">
+        <label for="" style="margin-left: 80%;">Sort Value: </label>
+        <select name="sortType" 
+            id="sortType" 
+            placeholder="Sort Products by" 
+            [(ngModel)]="sortTypeSelected"
+            (change)="setSortType($event)" 
+        >
+        <option value="{{1}}" selected disabled> Select a sort type </option>
+            <option value="{{1}}"> Price Low to High </option>
+            <option value="{{-1}}"> Price High to Low </option>
+        </select>
+        <hr>
+    </div>
+
+    <div class="row">
+        <!-- <h1>{{productsCategory}}</h1> -->
+        <div class="col-2" style=" margin-left: 1%; background-color: rgb(248, 248, 239); height: 500px;">
+
+        </div>
+        <div class="col">
+
+            <div class="container" (scroll)="onScroll()">
+                <div class="product-list">
+
+                    <div class="row">
+
+                        <div class="col-md-3 col-sm-6" *ngFor="let product of products">
+                            <div class="white-box" (click)="viewProductDetails(product._id)">
+                                <div class="product-img">
+                                    <img class="img-fluid"
+                                        id="productImage"
+                                        src="data:image/jpeg;base64,{{product.productImages[0]}}" 
+                                        accept=".jpeg,.png,.jpg"
+                                        alt="Product Image"
+                                    >
+                            
+                                </div>
+                                <div class="product-bottom">
+                                    <div class="product-name">{{product.productName}}</div>
+                                    <img 
+                                        id="ratingStar" 
+                                        class="img-fluid"
+                                        src="../../assets/Images/star2.png" 
+                                        alt="" 
+                                        *ngFor="let star of getStars(product.averageRating)"
+                                    >
+                                    <img 
+                                        id="ratingStar" 
+                                        class="img-fluid"
+                                        src="../../assets/Images/whiteStar.png" 
+                                        alt="" 
+                                        *ngFor="let star of getStars(1)"
+                                    >
+                                    <label for="" style="margin: 0 0 0 5%;">{{product.reviews.length}} Ratings</label>
+                                    <h5 id="sellingPrice" style="font-weight: 480;"> {{product.sellingPrice | currency : "INR"}}</h5>
+                                    <p id="maxRetailPrice"> MRP: {{product.maxRetailPrice | currency : "INR"}} 
+                                        <label for="" id="discount"> ({{getDiscount(product.sellingPrice, product.maxRetailPrice)}}% off)  </label> 
+                                    </p>
+
+                                    <p>
+                                        Get it by 
+                                        <b>Tomorrow, {{currentDay}} {{currentMonth}} </b> 
+                                        <br>
+                                        FREE Delivery by Amazon
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

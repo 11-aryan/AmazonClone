@@ -1,0 +1,176 @@
+.carousel-item img {
+    height: 400px;
+    width: 700px;
+    overflow: visible;
+}
+
+.carousel-item {
+    transition: transform 0.5s fade;
+}
+
+// .carousel-item img {
+//     height: auto;
+//     overflow: visible;
+// }
+
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+    transition: opacity 0s 0.6s;
+}
+
+
+
+//################################################################Product Card###############################################################
+
+// * {
+//     margin: 0px;
+//     padding: 0px;
+//     box-sizing: border-box;
+// }
+
+// *::before,
+// *::after {
+//     box-sizing: border-box;
+// }
+
+body {
+    background-color: #ffffff;
+    font-size: 16px;
+    // line-height: 1.3rem;
+    font-family: Roboto, sans-serif;
+    border-radius: 0px;
+}
+
+.blog {
+    text-align: center;
+    margin: 40px 0px;
+
+    .blog_title {
+        margin: 0px 0px 30px;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .blog_wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-content: center;
+        width: 100%;
+        justify-content: center;
+
+        .blog_item {
+            a {
+                color: inherit;
+                /* blue colors for links too */
+                text-decoration: inherit;
+            }
+
+            margin: 0px 20px 40px;
+            padding: 10px;
+            min-height: 300px;
+            background: #fff 50%;
+            background-size: cover;
+            border-radius: 0px;
+            text-decoration: none;
+            box-shadow: 8px 14px 38px rgba(39, 44, 49, .06),
+            1px 3px 8px rgba(39, 44, 49, .03);
+            transition: all .5s ease;
+
+            .bi_img {
+                height: 200px;
+                margin: 0px 0px 20px;
+                overflow: hidden;
+
+                img {
+                    width: 90%;
+                }
+            }
+
+            .bi_title {
+                font-size: 1.2rem;
+                font-weight: 500;
+                margin: 1.5em 0 .5em;
+            }
+
+            .bi_content {
+                padding: 20px;
+                font-size: 0.8rem;
+                text-align: justify;
+                color: #999999;
+            }
+
+            .reading_time {
+                font-family: 'Raleway', sans-serif;
+                color: #326094;
+                font-size: 0.8rem;
+                line-height: 33px;
+                letter-spacing: .5px;
+                text-align: left;
+                margin-left: 2%;
+            }
+
+            &:hover {
+                box-shadow: 8px 28px 50px rgba(39, 44, 49, .07), 1px 6px 12px rgba(39, 44, 49, .04);
+                transition: all .4s ease;
+                transform: translate3D(0, -1px, 0) scale(1.02);
+            }
+        }
+    }
+
+    .blog_button {
+        a {
+            text-decoration: inherit;
+            display: block;
+            width: 200px;
+            margin: 0px auto 24px;
+            letter-spacing: 1px;
+            padding: 15px 26px;
+            border-radius: 10px;
+            background: #fc4f4f;
+            color: white;
+            outline-offset: -2px;
+            transition: all .3s ease;
+
+            &:hover {
+                background: #fff;
+                color: #fc4f4f;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .blog {
+        .blog_wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .blog {
+        .blog_wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+
+.blogs {
+    text-align: center;
+}
+
+#blogsHeading {
+    color: black;
+    font-size: 60px;
+    font-weight: 500;
+    margin: 0% 0 5% 0%;
+    text-shadow: -5px 15px 45px rgba(0, 0, 0, 0.5);
+}
+
+.topRowCardHeading {
+    text-align: left; 
+    margin: 2% 0 4% 5%; 
+    font-weight: 650;
+}

@@ -1,0 +1,56 @@
+<app-banner></app-banner>
+
+<div class="ordersContainer">
+    <h3>Your orders</h3>
+
+    <div *ngFor="let order of orders;" style="margin-top: 8%;" id="order">
+        <div class="row" id="orderHeading">
+            <div class="col">
+                <span id="orderDate"> <h6>Ordered Date: </h6> {{order.orderedDate | date}} </span>
+            </div>
+            <div class="col">
+                <span id="orderAmount"> <h6>Total: </h6>  {{order.totalAmount | currency : "INR"}} </span>
+            </div>
+            <div class="col">
+                <!-- <span id="orderStatus"> <h6>Order Status: </h6>  {{order.status}} </span> -->
+            </div>
+        </div>
+        
+        <div class="row" id="orderDetailsContainer">
+            <span id="delieveredDate" class="my-2"> Delivered date: 
+                <em *ngIf="!checkDeliveryDate(order.deliveredDate)">Not confirmed</em>
+            </span>
+            <div class="col">
+                <!-- <img class="img-fluid"
+                    id="productImage"
+                    src="data:image/jpeg;base64,{{getProduct(order.productId).productImages[0]}}" 
+                    accept=".jpeg,.png,.jpg"
+                    alt="Product Image"
+                > -->
+                <img class="img-fluid" id="productImage"  src="../../assets/Images/Products/samsumgbook360.jpeg" alt="">
+            </div>
+            <div class="col">
+                <span id="productName"> {{order.productId}}</span>
+            </div>
+            <div class="col">
+                <button class="btn btn-warning orderActionBtn my-1" (click)="addProductReview(order.productId)" > Write a Product Review </button>
+                <button class="btn btn-warning orderActionBtn my-1" (click)="viewReview(order.productId)" > View  your Review </button>
+            </div>
+            
+            <!-- <div class="col" *ngIf="reviewExists(order.productId, order.customerId)">
+                <button class="btn btn-warning orderActionBtn" (click)="updateProductReview(order.productId)" > Update your Review </button>
+            </div> -->
+        </div>
+        <div class="row">
+
+        </div>
+        <!-- <div *ngFor="let product of getProducts(order)" > -->
+            <!-- product._id -->
+        <!-- </div> -->
+        
+    </div>
+
+
+</div>
+
+

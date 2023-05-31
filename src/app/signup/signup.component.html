@@ -1,0 +1,121 @@
+<div class="signupHeading">
+    <a [routerLink]="['']"> <img src="../../assets/Images/logo-black.png" alt=""> </a>
+    <p id="signupH2">Create Account</p>
+</div>
+
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)" class="signupForm">
+
+    <div class="field">
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
+                <label for="firstName"> <b> First Name </b> </label>
+                <input class="form-control" type="text" id="firstName" formControlName="firstName"
+                    [ngClass]="{ 'is-invalid': (f['firstName'].touched || submitted)&& f['firstName'].invalid }">
+
+                <div [ngClass]="{ 'd-none': (f['firstName'].untouched && !submitted) || f['firstName'].valid}">
+                    <small class="text-danger" *ngIf="f['firstName'].errors?.['required']">
+                        First Name Cannot be blank
+                    </small>
+                </div>
+            </div>
+
+            <div class="col" style=" padding: 0 0 0 5px;">
+                <label for="lastName"> <b> Last Name </b> </label>
+                <input class="form-control" type="text" id="lastName" formControlName="lastName"
+                    [ngClass]="{ 'is-invalid': (f['lastName'].touched || submitted)&& f['lastName'].invalid }">
+
+                <div [ngClass]="{ 'd-none': (f['lastName'].untouched && !submitted) || f['lastName'].valid}">
+                    <small class="text-danger" *ngIf="f['lastName'].errors?.['required']">
+                        Last Name Cannot be blank
+                    </small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <label for="email"> <b> Email</b> </label>
+            <input class="form-control" type="email" id="email" formControlName="email"
+                [ngClass]="{ 'is-invalid': (f['email'].touched || submitted) && f['email'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['email'].untouched && !submitted) || f['email'].valid}">
+                <small class="text-danger" *ngIf="f['email'].errors?.['required']">
+                    Email Cannot be blank
+                </small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="password"> <b> Password</b> </label>
+            <input class="form-control" type="text" id="password" formControlName="password"
+                [ngClass]="{ 'is-invalid': (f['password'].touched || submitted) && (f['password'].invalid || signupForm.errors?.['weakPassword']) }">
+
+            <div>
+                <small>Password must be 5 characters long, must contain uppercase alphabets, lowercase alphabets,
+                    numbers, and any of (# @ $ ^ &)</small>
+                <br><br>
+            </div>
+            <div [ngClass]="{ 'd-none': (f['password'].untouched && !submitted) || f['password'].valid}">
+                <small class="text-danger" *ngIf="f['password'].errors?.['required']">
+                    Password Cannot be blank
+                </small>
+            </div>
+
+            <div [ngClass]="{ 'd-none': (f['password'].untouched && !submitted) || f['password'].invalid}">
+                <small class="text-danger" *ngIf="signupForm?.errors?.['weakPassword']">
+                    Password Requirements don't match
+                </small>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <label for="confirmPassword"> <b> Confirm Password</b> </label>
+            <input class="form-control" type="text" id="confirmPassword" formControlName="confirmPassword"
+                [ngClass]="{ 'is-invalid': (f['confirmPassword'].touched || submitted) && (f['confirmPassword'].invalid || signupForm.errors?.['passwordMismatch']) }">
+            <div [ngClass]="{ 'd-none': (f['confirmPassword'].untouched && !submitted) || f['confirmPassword'].valid}">
+                <small class="text-danger" *ngIf="f['confirmPassword'].errors?.['required']">
+                    Confirm Password Cannot be blank
+                </small>
+            </div>
+            <div
+                [ngClass]="{ 'd-none': (f['confirmPassword'].untouched && !submitted) || f['confirmPassword'].invalid}">
+                <small class="text-danger" *ngIf="signupForm.errors?.['passwordMismatch']">
+                    Passwords Don't Match
+                </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="mobileNumber"> <b> Mobile Number</b> </label>
+            <input class="form-control" type="text" id="mobileNumber" formControlName="mobileNumber"
+                [ngClass]="{ 'is-invalid': (f['mobileNumber'].touched || submitted) && f['mobileNumber'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['mobileNumber'].untouched && !submitted) || f['mobileNumber'].valid}">
+                <small class="text-danger" *ngIf="f['mobileNumber'].errors?.['required']">
+                    Mobile Number Cannot be blank
+                </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="dateOfBirth"> <b> Date of Birth</b> </label>
+            <input class="form-control" type="date" id="dateOfBirth" formControlName="dateOfBirth"
+                [ngClass]="{ 'is-invalid': (f['dateOfBirth'].touched || submitted) && f['dateOfBirth'].invalid }">
+            <div [ngClass]="{ 'd-none': (f['dateOfBirth'].untouched && !submitted) || f['dateOfBirth'].valid}">
+                <small class="text-danger" *ngIf="f['dateOfBirth'].errors?.['required']">
+                    Date Of Birth Cannot be blank
+                </small>
+            </div>
+        </div>
+
+    </div>
+
+    <button id="signupBtn" class="btn btn-warning my-5" type="submit">Signup</button>
+
+    <br>
+    <span>Already have an account ? </span>
+    <br>
+    <button id="signinAccountBtn" class="btn btn-light my-1" [routerLink]="['/signin']"> Sign in to your Account </button>
+
+</form>

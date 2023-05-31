@@ -1,0 +1,89 @@
+#productImage {
+    height:495px;
+    width: 480px;
+}
+
+
+#sidebarProductImage {
+    height: 100%;
+    width: 100%;
+    // border-radius: 5px;
+}
+
+
+#sidebarLeft {
+    margin-top: 10%;
+    margin-left: 5%;
+    height: 80px;
+    width: 90px;
+}
+
+#sidebarProductImage:hover {
+    // border-style: solid; 
+    // border-color: blue;
+    box-shadow: 0px 0px 0px #23dce2, 0px 0px 8px #23dce2,;
+}
+
+#sidebarRight {
+    border-style: solid;
+    border-radius: 8px;
+    margin: 0 0 0 10%;
+    // height: 700px;
+    width: 270px;
+    padding: 25px;
+    border-color: rgb(201, 198, 198);
+}
+
+#addToCartBtn {
+    margin-top: 10%;
+    width: 100%;
+    border-radius: 50px;
+}
+
+#buyNowBtn {
+    width: 100%;
+    margin-top: 5%;
+    border-radius: 50px;
+}
+
+#selectQuantity {
+    width: 20%;
+    margin-left: 3%;
+    background-color: #EFEFEF;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+#discount {
+    font-weight: 400;
+    color: red;
+}
+
+#sellingPrice {
+    font-size: 25px;
+}
+
+#mrp {
+    text-decoration: line-through;
+    color: grey;
+}
+
+
+.reviewContainer {
+    margin: 20px 0 0 0;
+}
+
+#ratingStar {
+    height: 20px;
+    width: 20px;
+    margin: 1% 0 2% 0;
+}
+
+#reviewHeadline {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+#reviewDescription {
+    font-size: 14px;
+}

@@ -1,0 +1,75 @@
+<app-banner></app-banner>
+
+<div class="container-fluid">
+
+    <div class="row" style="height: 500px; margin-top: 3%;">
+
+        <div class="col-1">
+
+            <div id="sidebarLeft" class="row" *ngFor="let strImg of product.productImages">
+                <img class="img-fluid" 
+                    id="sidebarProductImage" 
+                    src="data:image/jpeg;base64,{{strImg}}" 
+                    accept=".jpeg,.png,.jpg"
+                    alt=""
+                    (mouseenter)="changeSelectedImage(strImg)"
+                >
+            </div>
+
+        </div>
+
+        <div id="productImageContainer" class="col-4">
+            <img class="img-fluid" 
+                id="productImage"  
+                src="data:image/jpeg;base64,{{selectedProductImage}}" 
+                accept=".jpeg,.png,.jpg"
+                alt=""
+            >
+        </div>
+
+        <div class="col-4">
+            <h2>{{product.productName}}</h2>
+            <p id="brand">Brand: {{product.brand}}</p>
+            <p id="rating">Product Rating: {{product.averageRating}}</p>
+            <hr>
+            <h3 id="discount">-{{discount}}% </h3>
+            <p id="sellingPrice">{{product.sellingPrice | currency: "INR"}}</p>
+            <p id="mrp">MRP: <span> {{product.maxRetailPrice | currency : "INR"}} </span> </p>
+            <h4 id="aboutProduct">About Product: </h4>
+            <p>{{product.aboutProduct}}</p>
+            <h4 id="" style="margin-top: 10%;">Reviews: </h4>
+            <div class="reviewContainer" *ngFor="let review of productReviews">
+                <img id="ratingStar" src="../../assets/Images/star.png" alt="" *ngFor="let star of getStars(review.rating)">
+                <h6 id="reviewHeadline">{{review.headline}}</h6> 
+                <p id="reviewDescription"> {{review.description}}</p>
+                <hr>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div id="sidebarRight">
+                <h4>{{product.sellingPrice | currency : "INR"}}</h4>
+                <p>Free delivery on your first order <a href="">Details</a></p>
+                <p>Or fastest delivery Today withing 12 hours <a href="">Details</a></p>
+                <p>Instock</p>
+                <p>Solde by: Seller Name</p> 
+
+                <label for="">Select Quantity: </label>
+                <select name="" id="selectQuantity" [(ngModel)]="quantitySelected">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <button id="addToCartBtn" class="btn btn-warning" (click)="addProductToCart(product._id)" >Add to Cart</button>
+                <button id="buyNowBtn" class="btn btn-warning"> Buy Now</button>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

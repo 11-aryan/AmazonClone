@@ -1,0 +1,53 @@
+#logoImg {
+    height: 80px;
+    width: 140px;
+    padding: 0;
+    margin: 0 0 0 25%;
+}
+
+#checkoutHeading {
+    font-size: 35px;
+    margin: 0 0 0 33%;
+    font-weight: 400;
+}
+
+#addAddressBtn {
+    margin: 3% 0 0 2%;
+    color: rgb(35, 120, 176);
+}
+
+#addAddressBtn:hover {
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.addressContainer {
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 2% 0 0 0;
+    width: 50%;
+}
+
+.selectedAddress {
+    border-color: orange; 
+    border-style: solid;
+    background-color: rgb(255, 240, 230);
+}
+
+.paymentMethodContainer {
+    border-style: solid;
+    border-color: grey;
+    border-radius: 8px; 
+    margin: 3% 0 0 0;
+    padding: 20px;
+    width: 50%;
+}
+
+.selectedPaymentMethod {
+    border-color: orange; 
+    border-style: solid;
+    background-color: rgb(255, 240, 230);
+}
