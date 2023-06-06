@@ -19,12 +19,55 @@
         </div>
 
         <div id="productImageContainer" class="col-4">
-            <img class="img-fluid" 
-                id="productImage"  
-                src="data:image/jpeg;base64,{{selectedProductImage}}" 
-                accept=".jpeg,.png,.jpg"
-                alt=""
-            >
+            <div class="row">
+                <img class="img-fluid" 
+                    id="productImage"  
+                    src="data:image/jpeg;base64,{{selectedProductImage}}" 
+                    accept=".jpeg,.png,.jpg"
+                    alt=""
+                >
+            </div>
+
+            <br><br>
+            <hr>
+            <div class="row">
+                <h5 style="margin: 5% 0 0 0">Recommend Product To Friends: </h5>
+                <div class="searchInputWrapper">
+                    <input class="searchInput" 
+                          type="text" 
+                          placeholder='Enter email id to search friends'
+                          [(ngModel)]="emailSearchTerm"
+                          (input)="searchUsers(emailSearchTerm)"
+                          (blur)="onSearchBoxBlur()"
+                          (focus)="onSearchBoxFocus()"
+                    >
+                    <i class="searchInputIcon fa fa-search"></i>
+                </div>
+
+                <div *ngIf="displaySearchSuggestions || hoveringOnSuggestions">
+                    <table class="searchSuggestions">
+                        <tbody (mouseenter)="hoveringOnSuggestions=true" (mouseleave)="hoveringOnSuggestions=false">
+                          <tr *ngFor="let friend of friendSearchResults; index as i">
+                            <td *ngIf="isFriend(friend._id)">
+                                <div class="row">
+                                    <div class="col">
+                                        <span> {{friend.email}} </span>
+                                        <br>
+                                        <span> {{ friend.firstName }} {{friend.lastName}} </span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <span id="recommendBtn" (click)="recommendProductToFriend(friend._id)">Recommend</span>
+                                    </div>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
         </div>
 
         <div class="col-4">
@@ -38,12 +81,19 @@
             <h4 id="aboutProduct">About Product: </h4>
             <p>{{product.aboutProduct}}</p>
             <h4 id="" style="margin-top: 10%;">Reviews: </h4>
+
+            <div *ngIf="productReviews==null">
+                <span>No review exists for this product yet</span>
+            </div>
+
             <div class="reviewContainer" *ngFor="let review of productReviews">
                 <img id="ratingStar" src="../../assets/Images/star.png" alt="" *ngFor="let star of getStars(review.rating)">
                 <h6 id="reviewHeadline">{{review.headline}}</h6> 
                 <p id="reviewDescription"> {{review.description}}</p>
                 <hr>
             </div>
+
+            <div class="verticalSpace" style="margin: 25% 0 0 0"></div>
         </div>
 
         <div class="col-3">
@@ -51,20 +101,33 @@
                 <h4>{{product.sellingPrice | currency : "INR"}}</h4>
                 <p>Free delivery on your first order <a href="">Details</a></p>
                 <p>Or fastest delivery Today withing 12 hours <a href="">Details</a></p>
-                <p>Instock</p>
-                <p>Solde by: Seller Name</p> 
+                <p class="text-success" *ngIf="product.quantity">Instock</p>
+                <p>Sold by: {{seller.firstName}}</p> 
 
-                <label for="">Select Quantity: </label>
-                <select name="" id="selectQuantity" [(ngModel)]="quantitySelected">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <div class="productActions m-0 p-0" *ngIf="product.quantity">
+                    <label for="">Select Quantity: </label>
+                    <select name="" 
+                            id="selectQuantity" 
+                            [(ngModel)]="quantitySelected"
+                            
+                    >
+                        <option *ngFor="let qty of getProductQuantityArray(product) " [selected]="1" [value]="qty">{{qty}}
+                        </option>
+                        <!-- <option value="{{1}}">1</option>
+                        <option value="{{2}}">2</option>
+                        <option value="{{3}}">3</option>
+                        <option value="{{4}}">4</option>
+                        <option value="{{5}}">5</option> -->
+                    </select>
 
-                <button id="addToCartBtn" class="btn btn-warning" (click)="addProductToCart(product._id)" >Add to Cart</button>
-                <button id="buyNowBtn" class="btn btn-warning"> Buy Now</button>
+                    <button id="addToCartBtn" class="btn btn-warning" (click)="addProductToCart(product._id)" >Add to Cart</button>
+                    <button id="buyNowBtn" class="btn btn-warning"> Buy Now</button>
+                </div>
+
+                <span class="text-danger" *ngIf="!product.quantity">
+                    Product Out Of Stock
+                </span>
+
 
             </div>
         </div>

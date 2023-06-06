@@ -13,7 +13,7 @@ import { Review } from '../Models/review';
 })
 export class UpdateProductReviewComponent {
 
-  product: Product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], []);
+  product: Product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], [], []);
   reviewForm: FormGroup;  
   submitted = false;
   customerId = "";

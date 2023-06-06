@@ -1,4 +1,4 @@
-package sellerController 
+package sellerController
 
 import (
 	connection "GoServer/Config"
@@ -18,7 +18,9 @@ import (
 	"net/http"
 
 	// "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -148,4 +150,37 @@ func CreateSeller(w http.ResponseWriter, r *http.Request) {
 
         json.NewEncoder(w).Encode(result)
     }
+}
+
+
+func GetsellerById(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Get Seller by Id called");
+	generic.SetupResponse(&w, r)
+
+	w.Header().Set("Content-Type", "application/json")
+	collection := connection.ConnectDB("sellers")
+
+	var seller model.Seller
+	var params = mux.Vars(r)
+
+    id, err := primitive.ObjectIDFromHex(params["id"])
+	if err != nil {
+		connection.GetError(err, w)
+		return
+	}
+
+	fmt.Println("seller id received: ", id)
+
+	filter := bson.M{"_id": id}
+
+	err = collection.FindOne(context.TODO(), filter).Decode(&seller)
+	fmt.Println("filter: ", filter)
+	fmt.Println(seller)
+
+	if err != nil {
+		connection.GetError(err, w)
+		return
+	}
+
+	json.NewEncoder(w).Encode(seller)
 }

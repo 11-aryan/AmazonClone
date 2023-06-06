@@ -6,7 +6,8 @@ export class Order {
     customerId: string; 
     // sellerId: string; 
     productId: string;
-    orderedDate: Date | undefined;
+    orderedDate: Date | undefined; 
+    orderQuantity: number;
     deliveredDate: Date | undefined;
     status: string; 
     shippingAddress: Address;
@@ -19,6 +20,7 @@ export class Order {
         // sellerId: string, 
         productId: string, 
         orderedDate: Date | undefined,
+        orderQuantity: number,
         deliveredDate: Date | undefined,
         status: string, 
         shippingAddress: Address,
@@ -30,6 +32,7 @@ export class Order {
         // this.sellerId =  sellerId;
         this.productId = productId;
         this.orderedDate = orderedDate;
+        this.orderQuantity = orderQuantity;
         this.deliveredDate = deliveredDate;
         this.status = status;
         this.shippingAddress = shippingAddress; 

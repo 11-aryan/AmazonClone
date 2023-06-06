@@ -53,7 +53,7 @@ export class SellerService {
   }
 
 
-  getSellerById(SellerId: number): Observable<Seller> {
+  getSellerById(SellerId: string): Observable<Seller> {
     return this.httpClient.get<Seller>(this.baseUrl + '/sellers/' + SellerId)
       .pipe(
         retry(1),

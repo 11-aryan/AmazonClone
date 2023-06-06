@@ -5,6 +5,7 @@ type Order struct {
 	CustomerId        	string      `json:"customerId" bson:"customerId"`
 	// SellerId 			string 		`json:"sellerId" bson:"sellerId"`	
 	ProductId        	string      `json:"productId" bson:"productId"`
+	OrderQuantity		int			`json:"orderQuantity" bson:"orderQuantity"`
 	OrderedDate			string   	`json:"orderedDate" bson:"orderedDate"`
 	DeliveredDate		string   	`json:"deliveredDate" bson:"deliveredDate"`
 	Status		    	string   	`json:"status" bson:"status"`

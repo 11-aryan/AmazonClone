@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class AddAddressComponent {
   addressForm: FormGroup; 
   submitted = false;
-  customer: Customer = new Customer("", "", "", "", "", new Date(), "", "", [], [])
+  customer: Customer = new Customer("", "", "", "", "", new Date(), "", "", [], [], [], [], []);
   subscriptions: Subscription[] = [];
 
   constructor(

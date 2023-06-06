@@ -23,7 +23,7 @@ export class BannerComponent {
   numProductsInCart = 0;
   userLoggedIn = false;
   userId = localStorage.getItem("customerId");
-  currentCustomer: Customer = new Customer("", "", "", "", "", new Date(), "", "", [], []);
+  currentCustomer: Customer = new Customer("", "", "", "", "", new Date(), "", "", [], [], [], [], []);
   cart: Cart = new Cart("", []);
   subscriptions:Subscription[] = [];
 
@@ -33,7 +33,7 @@ export class BannerComponent {
       private cartService: CartService, 
       private customerService: CustomerService
     ) {
-    if(localStorage.getItem('userId')!=null) {
+    if(localStorage.getItem('customerId')!=null) {
       this.userLoggedIn = true;
     }
   }
@@ -65,8 +65,6 @@ export class BannerComponent {
     //   console.log("All products: ", data);
     // })
     // this.subscriptions.push(getProductsSubs);
-
-
   }
 
   search(searchText: string): void {
@@ -101,7 +99,19 @@ export class BannerComponent {
   }
 
   viewProducts(category: string) {
-    this.router.navigate(['viewProducts'], {queryParams: {productCategory: category, sortVal: "1"}})
+    this.router.navigate(['viewProducts'], {
+      queryParams: {
+        productCategory: category, 
+        sortVal: "1", 
+        minPrice: "0", 
+        maxPrice: "100000000"
+      }
+    })
+  }
+
+  logout() {
+    localStorage.removeItem("customerId");
+    window.location.reload();
   }
 
 }

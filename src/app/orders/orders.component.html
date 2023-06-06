@@ -1,55 +1,78 @@
 <app-banner></app-banner>
 
 <div class="ordersContainer">
-    <h3>Your orders</h3>
-
-    <div *ngFor="let order of orders;" style="margin-top: 8%;" id="order">
-        <div class="row" id="orderHeading">
-            <div class="col">
-                <span id="orderDate"> <h6>Ordered Date: </h6> {{order.orderedDate | date}} </span>
-            </div>
-            <div class="col">
-                <span id="orderAmount"> <h6>Total: </h6>  {{order.totalAmount | currency : "INR"}} </span>
-            </div>
-            <div class="col">
-                <!-- <span id="orderStatus"> <h6>Order Status: </h6>  {{order.status}} </span> -->
-            </div>
-        </div>
-        
-        <div class="row" id="orderDetailsContainer">
-            <span id="delieveredDate" class="my-2"> Delivered date: 
-                <em *ngIf="!checkDeliveryDate(order.deliveredDate)">Not confirmed</em>
-            </span>
-            <div class="col">
-                <!-- <img class="img-fluid"
-                    id="productImage"
-                    src="data:image/jpeg;base64,{{getProduct(order.productId).productImages[0]}}" 
-                    accept=".jpeg,.png,.jpg"
-                    alt="Product Image"
-                > -->
-                <img class="img-fluid" id="productImage"  src="../../assets/Images/Products/samsumgbook360.jpeg" alt="">
-            </div>
-            <div class="col">
-                <span id="productName"> {{order.productId}}</span>
-            </div>
-            <div class="col">
-                <button class="btn btn-warning orderActionBtn my-1" (click)="addProductReview(order.productId)" > Write a Product Review </button>
-                <button class="btn btn-warning orderActionBtn my-1" (click)="viewReview(order.productId)" > View  your Review </button>
+    <div id="emptyOrdersContainer" class="col-10" *ngIf="orders==null">
+        <h3 id="emptyCartHeading">Your Have No Orders</h3>
+        <a href="" style="margin-right: 10%;">Shop today's deals</a>
+        <img id="emptyOrdersImg" src="../../assets/Images/emptyCart.svg" alt="">
+    </div>
+    
+    <div class="m-0 p-0" *ngIf="orders!=null">
+        <h3 style="margin-top: 5%;">Your orders</h3>
+        <div *ngFor="let order of orders;" style="margin: 2% 0 5% 0;" id="order">
+            <div class="row" id="orderHeading">
+                <div class="col">
+                    <span id="orderDate"> <h6>Ordered Date: </h6> {{order.orderedDate | date}} </span>
+                </div>
+                <div class="col">
+                    <span id="orderAmount"> <h6>Total: </h6>  {{order.totalAmount*order.orderQuantity | currency : "INR"}} </span>
+                </div>
+                <div class="col">
+                    <span id="orderAmount"> <h6>Quantity: </h6>  {{order.orderQuantity}} </span>
+                    <!-- <span id="orderStatus"> <h6>Order Status: </h6>  {{order.status}} </span> -->
+                </div>
             </div>
             
-            <!-- <div class="col" *ngIf="reviewExists(order.productId, order.customerId)">
-                <button class="btn btn-warning orderActionBtn" (click)="updateProductReview(order.productId)" > Update your Review </button>
-            </div> -->
-        </div>
-        <div class="row">
+            <div class="row" id="orderDetailsContainer">
+                <span id="delieveredDate" class="my-2"> Delivered date: 
+                    <em *ngIf="!checkDeliveryDate(order.deliveredDate)">Not confirmed</em>
+                </span>
+                <div class="col">
+                    <img class="img-fluid"
+                        id="productImage"
+                        src="data:image/jpeg;base64,{{getProductFromCache(order.productId)!.productImages[0]}}" 
+                        accept=".jpeg,.png,.jpg"
+                        alt="Product Image"
+                    >
+                </div>
+                <div class="col">
+                    <span id="productName"> {{getProductFromCache(order.productId)?.productName | slice : 0:60}}...</span>
+                    <br> <br>
+                    <span id="paymentMethod"> <h6>Payment Method: </h6>  {{order.paymentDetails.paymentMethod}} </span>
+                </div>
+                <div class="col">
+                    <button class="btn btn-warning orderActionBtn my-1" 
+                            (click)="addProductReview(order.productId)" 
+                            *ngIf="!reviewExists(order.productId, order.customerId)"
+                    > 
+                        Write a Product Review 
+                    </button>
+                    <button class="btn btn-warning orderActionBtn my-1" 
+                            (click)="viewReview(order.productId)" 
+                            *ngIf="reviewExists(order.productId, order.customerId)"
+                    > 
+                        View  your Review 
+                    </button>
+                    <button class="btn btn-secondary orderActionBtn my-1" 
+                            (click)="viewProductDetails(order.productId)" 
+                    > 
+                        View Product 
+                    </button>
+                </div>
+                
+                <!-- <div class="col" *ngIf="reviewExists(order.productId, order.customerId)">
+                    <button class="btn btn-warning orderActionBtn" (click)="updateProductReview(order.productId)" > Update your Review </button>
+                </div> -->
+            </div>
+            <div class="row">
 
+            </div>
+            <!-- <div *ngFor="let product of getProducts(order)" > -->
+                <!-- product._id -->
+            <!-- </div> -->
         </div>
-        <!-- <div *ngFor="let product of getProducts(order)" > -->
-            <!-- product._id -->
-        <!-- </div> -->
-        
+
     </div>
-
 
 </div>
 

@@ -2,13 +2,13 @@ package Router
 
 import (
 	customerController "GoServer/Middleware/Customers"
-	imageUploadController "GoServer/Middleware/Fileupload"
 	sellerController "GoServer/Middleware/Sellers"
 	userController "GoServer/Middleware/Users"
 	productController "GoServer/Middleware/Products"
 	cartController "GoServer/Middleware/Carts"
 	orderController "GoServer/Middleware/Orders"
 	reviewController "GoServer/Middleware/Reviews"
+	categoryController "GoServer/Middleware/Categories"
 	"github.com/gorilla/mux"
 )
 
@@ -20,8 +20,8 @@ func GetRouter() *mux.Router {
 	addProductHandler(apiRouter);
 	addOrderHandler(apiRouter);
 	addCartHandler(apiRouter);
-	addImageUploadHandler(apiRouter);
 	addReviewHandler(apiRouter);
+	addCategoryHandler(apiRouter);
 	return apiRouter
 }
 
@@ -39,6 +39,7 @@ func addUserHandler(router *mux.Router) {
 func addSellerHandler(router *mux.Router) {
 	router.HandleFunc("/api/sellers", sellerController.GetSellers).Methods("GET");
 	router.HandleFunc("/api/sellers", sellerController.CreateSeller).Methods("POST", "OPTIONS");
+	router.HandleFunc("/api/sellers/{id}", sellerController.GetsellerById).Methods("GET");
 }
 
 
@@ -47,6 +48,7 @@ func addCustomerHandler(router *mux.Router) {
 	router.HandleFunc("/api/customers", customerController.CreateCustomer).Methods("POST", "OPTIONS");
 	router.HandleFunc("/api/customers/{id}", customerController.GetCustomerById).Methods("GET");
 	router.HandleFunc("/api/customers/{id}", customerController.UpdateCustomer).Methods("PUT", "OPTIONS");
+	router.HandleFunc("/api/search/customers", customerController.GetCustomersByEmail).Methods("GET");
 }
 
 
@@ -56,8 +58,10 @@ func addProductHandler(router *mux.Router) {
 	router.HandleFunc("/api/products/{id}", productController.GetProductById).Methods("GET");
 	router.HandleFunc("/api/products/seller/{sellerId}", productController.GetProductsBySellerId).Methods("GET");
 	router.HandleFunc("/api/products/{id}", productController.UpdateProduct).Methods("PUT", "OPTIONS")
-	router.HandleFunc("/api/pagination/products", productController.GetPaginatedProducts).Methods("GET");
+	// router.HandleFunc("/api/pagination/products", productController.GetPaginatedProducts).Methods("GET");
+	router.HandleFunc("/api/pagination/products", productController.GetPaginatedProducts).Methods("POST", "OPTIONS");
 	router.HandleFunc("/api/search/products", productController.GetProductsByProductname).Methods("GET");
+	router.HandleFunc("/api/products/{id}", productController.DeleteProduct).Methods("DELETE", "OPTIONS");
 }
 
 
@@ -86,6 +90,10 @@ func addCartHandler(router *mux.Router) {
 }
 
 
-func addImageUploadHandler(router *mux.Router) {
-	router.HandleFunc("/api/uploadImages", imageUploadController.UploadImages).Methods("POST", "OPTIONS");
+func addCategoryHandler(router *mux.Router) {
+	router.HandleFunc("/api/categories", categoryController.GetCategories).Methods("GET")
+	router.HandleFunc("/api/categories", categoryController.CreateCategory).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/categories/{id}", categoryController.UpdateCategory).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/categories/{id}", categoryController.DeleteCategory).Methods("DELETE", "OPTIONS");
+	router.HandleFunc("/api/search/categories", categoryController.GetCategoriesByCategoryName).Methods("GET");
 }

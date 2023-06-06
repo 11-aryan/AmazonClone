@@ -37,8 +37,11 @@
                                 <p id="aboutProduct">{{productsInCart[id].aboutProduct | slice:0:150}}</p>
                                 <p id="removeFromCartBtn" (click)="removeFromCart(cartItem)">Delete</p>
                                 <label for="quantity">Quantity: </label>
-                                <select id="quantity" [(ngModel)]="cartItem.quantityInCart" name="quantity"
-                                    (ngModelChange)="updateQuantity(cartItem)">
+                                <select id="quantity" 
+                                        name="quantity"
+                                        [(ngModel)]="cartItem.quantityInCart" 
+                                        (ngModelChange)="updateQuantity(cartItem)"
+                                >
                                     <option *ngFor="let qty of [1, 2, 3, 4, 5]" [selected]="1" [value]="qty">{{qty}}
                                     </option>
                                 </select>
@@ -60,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="col" id="proceedToBuy">
+            <div class="col" id="proceedToBuy" *ngIf="cartItems.length>0">
                 <p> <b>Subtotal</b> {{subTotal | currency : "INR"}} </p>
                 <button id="proceedToBuyBtn" class="btn btn-warning" (click)="checkout()"> Proceed to Buy</button>
             </div>

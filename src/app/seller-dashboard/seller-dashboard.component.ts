@@ -49,6 +49,7 @@ export class SellerDashboardComponent {
     this.productsService.deleteProduct(productId).subscribe(data => {
       console.log("Deleting product: ", data);
     })
+    window.location.reload();
   }
 
 }

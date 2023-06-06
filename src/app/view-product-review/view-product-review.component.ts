@@ -16,7 +16,7 @@ export class ViewProductReviewComponent {
 
   productId: string = "";
   customerId: string = "";
-  product: Product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], []);
+  product: Product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], [], []);
   reviewExists = false;
   review: Review = new Review("", "", "", 0, "", "", 0, []);
   numberOfStars = 0;
@@ -103,7 +103,7 @@ export class ViewProductReviewComponent {
     this.reviewService.deleteReview(reviewId).subscribe(data => {
       console.log("Deleting review: ", data);
     }) 
-    // window.location.reload();
+    window.location.reload();
   }
 
   getStarsArray(count: number) {

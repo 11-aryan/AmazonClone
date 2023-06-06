@@ -70,6 +70,22 @@
 
         <div class="row">
             <div class="col" style=" padding: 0;">
+                <label for="productProperties"> <b> Product Properties </b> </label>
+                <textarea class="form-control" type="text" id="productProperties" formControlName="productProperties" placeholder="Enter Product Properties Separated by comma ( , )"
+                    [ngClass]="{ 'is-invalid': (f['productProperties'].touched || submitted)&& f['productProperties'].invalid }">
+                </textarea>
+
+                <div [ngClass]="{ 'd-none': (f['productProperties'].untouched && !submitted) || f['productProperties'].valid}">
+                    <small class="text-danger" *ngIf="f['productProperties'].errors?.['required']">
+                        Product Properties Cannot be blank
+                    </small>   
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col" style=" padding: 0;">
                 <label for="maxRetailPrice"> <b> Enter Max Retail Price </b> </label>
                 <input class="form-control" type="number" id="maxRetailPrice" formControlName="maxRetailPrice"
                     [ngClass]="{ 'is-invalid': (f['maxRetailPrice'].touched || submitted)&& f['maxRetailPrice'].invalid }">

@@ -1,0 +1,107 @@
+<app-banner></app-banner>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container-fluid m-0 p-0">
+
+    <div class="row">
+
+        <div class="col" style="">
+
+            <div class="row">
+                <div class="container my-3">
+                    <h1 class="heading">Enter email to find users</h1>
+                    <div class="searchInputWrapper">
+                      <input class="searchInput" 
+                            type="text" 
+                            placeholder='focus here to search'
+                            [(ngModel)]="searchTerm"
+                            (input)="searchUsers(searchTerm)"
+                            (blur)="onSearchBoxBlur()"
+                            (focus)="onSearchBoxFocus()"
+                      >
+                      <i class="searchInputIcon fa fa-search"></i>
+                    </div>
+                    
+                    <div *ngIf="displaySearchSuggestions || hoveringOnSuggestions">
+                        <table class="searchSuggestions">
+                            <tbody (mouseenter)="hoveringOnSuggestions=true" (mouseleave)="hoveringOnSuggestions=false">
+                              <tr *ngFor="let customer of customerSearchResults; index as i">
+                                <td (click)="onCustomerSelect(customer._id)" *ngIf="customer._id!=currentCustomerId">
+                                    <span> {{customer.email}} </span>
+                                    <br>
+                                    <span> {{ customer.firstName }} {{customer.lastName}} </span>fasdfasdfasd
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row" *ngIf="customerSelected!=null">
+                <div class="customerDetailsContainer">
+                    <span id="customerName">{{customerSelected.firstName}} {{customerSelected.lastName}}</span>
+                    <br>
+                    <span id="customerEmail">{{customerSelected.email}}</span>
+                    <br>
+                    <span id="numFollowers">Number of Followers: <span id="followersCount"> {{customerSelected.friends.length}}</span> </span>
+                    <br>
+                    <button class="btn btn-warning" id="sendRequestBtn" (click)="sendFriendRequest()">Send Request</button>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <h4 style="margin: 5% 0 0 2%">Your Friends</h4>
+                <div class="col-5" *ngFor="let friend of this.currentCustomer.friends">
+                    <div class="friendsContainer">
+                        <div class="row">
+                            <div class="col">
+                                <span id="customerName">{{allCustomerIdMap.get(friend)?.firstName}} {{allCustomerIdMap.get(friend)?.lastName}}</span>
+                                <br>
+                                <span id="customerEmail">{{allCustomerIdMap.get(friend)?.email}}</span>
+                                <br>
+                                <span id="numFollowers">Number of Followers: <span id="followersCount"> {{allCustomerIdMap.get(friend)?.friends?.length}}</span> </span>
+                            </div>
+                            <div class="col-3">
+                                <span id="rejectRequestBtn" (click)="removeFriend(friend)"> Remove </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    
+        <div class="col-3" style="height: 1000px;" id="rightColumn">
+            <h4 style="margin: 10% 0 0 0;">Friend Requests</h4>
+            <div *ngFor="let friendId of currentCustomer.friendRequests">
+
+                    <div class="friendRequestContainer">
+
+                        <div class="row">
+                            <div class="col">
+                                <span>{{allCustomerIdMap.get(friendId)?.firstName}} {{allCustomerIdMap.get(friendId)?.lastName}}</span>
+                                <br>
+                                <span>{{allCustomerIdMap.get(friendId)?.email}}</span>
+                            </div>
+
+                            <div class="col-3">
+                                <span id="acceptRequestBtn" (click)="acceptFriendRequest(friendId)">Accept</span>
+                            </div>
+                            
+                            <div class="col-3">
+                                <span id="rejectRequestBtn" (click)="rejectFriendRequest(friendId)">Reject</span>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

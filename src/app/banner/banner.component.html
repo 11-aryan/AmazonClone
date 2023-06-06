@@ -23,7 +23,7 @@
           <span class="productCategory dropdown-item" (click)="viewProducts('Mobile_Phones')"> Mobiles </span>
           <span class="productCategory dropdown-item" (click)="viewProducts('Computers')"> Computers </span>
           <span class="productCategory dropdown-item" (click)="viewProducts('Home')"> Home </span>
-          <span class="productCategory dropdown-item" (click)="viewProducts('Fashion')"> Fashion </span>
+          <span class="productCategory dropdown-item" (click)="viewProducts('Watches')"> Watches </span>
           <span class="productCategory dropdown-item" (click)="viewProducts('Groceries')"> Groceries </span>
           <span class="productCategory dropdown-item" (click)="viewProducts('All')"> All Products </span>
           <!-- <div class="dropdown-divider"></div>
@@ -34,13 +34,16 @@
       <li class="nav-item mx-3">
         <a class="nav-link" [routerLink]="['/sellerSignin']" >Sell</a>
       </li>
-      
+    
+
       <div class="search-box">
         <form class="form-inline my-2 my-lg-0" style="width: 100%;">
           <input class="form-control mr-sm-2" type="text" name="searchTerm" 
-          [(ngModel)]="searchTerm" (input)="search(searchTerm)"
-          placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-1" type="submit">Search</button>
+                [(ngModel)]="searchTerm" (input)="search(searchTerm)"
+                placeholder="Search" aria-label="Search"
+                style="border-radius: 3px; width: 500px;"
+          >
+          <!-- <button class="btn btn-outline-success my-1" type="submit">Search</button> -->
         </form>
 
         <table class="searchSuggestions">
@@ -54,14 +57,21 @@
         </table>
       </div>
 
+
+      <li class="nav-item mx-3" *ngIf="userLoggedIn">
+        <span id="logoutBtn" style="color: white; margin: 2% 0 0 0;" (click)="logout()">Logout</span>
+      </li>
+
       
     </ul>
     
     <!-- <div id="signinBtn" class="btn" [routerLink]="['/signin']">Sign In</div>
     <div id="signupBtn" class="btn" [routerLink]="['/signup']">Sign Up</div> -->
 
-    <div *ngIf="!userLoggedIn" id="accountActionsBtn" class="btn" [routerLink]="['/signup']"> <p> Hello, signin <b> Accounts & Lists </b>  </p> </div>
-    <div *ngIf="userLoggedIn" id="accountActionsBtn" class="btn" [routerLink]="['/customerAccountDetails']"> <p> Hello, {{currentCustomer.firstName}} <b> Accounts & Lists </b>  </p> </div>
+    <div id="accountActionsBtn" class="btn" [routerLink]="['/findFriends']"> <p> View or Add <b> Friends </b>  </p> </div>
+
+    <div *ngIf="!userLoggedIn" id="accountActionsBtn" class="btn" [routerLink]="['/signin']"> <p> Hello, signin <b> Accounts & Lists </b>  </p> </div>
+    <div *ngIf="userLoggedIn" id="accountActionsBtn" class="btn" [routerLink]="['/#']"> <p> Hello, {{currentCustomer.firstName}} <b> Accounts & Lists </b>  </p> </div>
 
     <div id="returnsAndOrdersBtn" class="btn" [routerLink]="['/orders']"> <p> Returns <b> & Orders </b>  </p></div>
 

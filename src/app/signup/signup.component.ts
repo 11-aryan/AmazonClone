@@ -78,7 +78,7 @@ export class SignupComponent {
 
   private getCustomerDataFromForm():Customer {
     const formValue = this.signupForm.value;
-    const user = new Customer("", "", "", "", "", new Date(), "", "", [], []);
+    const user = new Customer("", "", "", "", "", new Date(), "", "", [], [], [], [], []);
     
     user._id = "";
     user.firstName = formValue.firstName;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { Customer } from '../Models/customer';
 
@@ -73,6 +73,17 @@ export class CustomerService {
       .pipe(
         retry(1),
         catchError(this.httpError)
+      );
+  }
+
+  getCustomerByEmail(customerEmail: string): Observable<Customer[]> {
+    const params = new HttpParams()
+        .set("customerEmail", customerEmail); 
+
+    return this.httpClient.get<Customer[]>(this.baseUrl + '/search/customers', { params })
+        .pipe(
+          retry(1),
+          catchError(this.httpError)
       );
   }
 

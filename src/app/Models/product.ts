@@ -13,6 +13,7 @@ export class Product {
     productCategories: string[]; 
     averageRating:  number;
     productImages: string[];   
+    productProperties: string[];
     reviews: Review[];
 
     constructor(
@@ -28,6 +29,7 @@ export class Product {
         unitsSold: number, 
         averageRating:  number,
         productImages: string[], 
+        productProperties: string[],
         reviews: Review[]
     ) {
         this._id = _id;
@@ -42,6 +44,7 @@ export class Product {
         this.productCategories = productCategories;
         this.averageRating = averageRating;
         this.productImages = productImages;
+        this.productProperties = productProperties;
         this.reviews = reviews;
     }
 

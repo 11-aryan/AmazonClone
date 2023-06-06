@@ -1,0 +1,52 @@
+<app-banner></app-banner>
+
+<div class="container">
+
+    <h3 style="text-align: center; font-weight: 400; margin: 5% 0 0 0;">Product Recommendations</h3>
+
+    <div class="row">
+
+        <div class="col">
+
+
+            <div *ngIf="currentCustomer">
+                <div class="productContainer" *ngFor="let productId of currentCustomer.friendProductRecommendations">
+    
+                    <div class="container" *ngIf="productId!=null">
+                        <div class="row">
+                            <img class="img-fluid" 
+                                id="productImage"  
+                                src="data:image/jpeg;base64,{{getProductFromId(productId).productImages[0]}}" 
+                                accept=".jpeg,.png,.jpg"
+                                alt=""
+                            >
+                        </div>
+                        
+                        <div class="row">
+                            {{getProductFromId(productId).productName}}
+                        </div>
+
+                        <br>
+                        <div class="row my-3">
+                            <div class="col">
+                                <span id="viewProductBtn" class="productActionBtn" (click)="viewProduct(productId)" >View Product</span>
+                            </div>
+                            <div class="col">
+                                <span id="removeProductBtn" class="productActionBtn" (click)="removeRecommendation(productId)" >Remove Product</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+</div>

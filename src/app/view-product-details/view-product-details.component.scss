@@ -87,3 +87,116 @@
 #reviewDescription {
     font-size: 14px;
 }
+
+
+  
+body {
+    background-color: #eee;
+    color: #a1a1a1;
+    font-family: sans-serif;
+}
+
+.container {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.searchInputWrapper {
+    position: relative;
+    margin: 5% 0 0 0;
+}
+
+.searchInput {
+    width: 450px;
+    height: 35px;
+    padding: 0 1rem; 
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    transition: transform 0.1s ease-in-out;
+}
+
+::placeholder {
+color: #a1a1a1;
+}
+
+/* hide the placeholder text on focus */
+:focus::placeholder {
+    text-indent: -999px
+}
+
+.searchInput:focus {
+    outline: none;
+    transform: scale(1.1);
+    transition: all 0.1s ease-in-out;
+}
+
+.searchInputIcon {
+    position: absolute;
+    right: 0.8rem;
+    top: 0.5rem;
+    color: #a1a1a1;
+    transition: all 0.1s ease-in-out;
+}
+
+.container:focus-within > 
+.searchInputWrapper > .searchInputIcon {
+right: 0.2rem;
+}
+
+
+table {
+    height: 0;
+    overflow: visible;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 450px;
+    background-color: white;
+    position: relative;
+    z-index: 500;
+    margin: 2px 0 0 0;
+    // left: 495px;
+    // top:48px;
+
+    th {
+        background-color: red;
+        border: 1px solid red;
+    }
+    td {
+        border: 1px solid #dddddd;
+    }
+    td, th {
+        text-align: left;
+        padding: 8px;
+    }
+
+    td:hover {
+        background-color: #c3e6e9;
+        cursor: pointer;
+        color: black;
+    }
+        
+    // tr:nth-child(even) {
+    //     background-color: #dddddd;
+    // }
+}
+
+
+#recommendBtn {
+    font-size: 16px;
+    color: rgb(70, 102, 161);
+    font-weight: 550;
+}
+
+#recommendBtn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

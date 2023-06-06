@@ -35,7 +35,7 @@ export class AddProductsComponent {
       sellingPrice: ['', Validators.required], 
       productCategories: ['', Validators.required],       
       quantity: ['', Validators.required], 
-      // productImages: ['', Validators.required], 
+      productProperties: ['', Validators.required],
     })
   }
 
@@ -124,13 +124,13 @@ export class AddProductsComponent {
 
     console.log("AddProduct Form Values : ", this.addProductForm.value);
     alert("Added Product Successfully")
-    // window.location.reload()
+    window.location.reload()
   }
 
 
   private getProductDataFromForm():Product {
     const formValue = this.addProductForm.value;
-    const product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], []);
+    const product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], [], []);
     
     console.log("Seller id from LS: ", localStorage.getItem('sellerId'));
     
@@ -142,6 +142,12 @@ export class AddProductsComponent {
     product.sellingPrice = formValue.sellingPrice;
     product.quantity = formValue.quantity;
     product.productCategories = formValue.productCategories;
+    product.productCategories.push("All");
+    product.productProperties = formValue.productProperties.split(',') 
+
+    for(let i=0; i<product.productProperties.length; i++) {
+      product.productProperties[i]= product.productProperties[i].toLowerCase().trim();
+    }
 
     return product;
   }

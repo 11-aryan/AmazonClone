@@ -67,34 +67,23 @@
         </div>
 
 
-        <!-- <ng-multiselect-dropdown formControlName="productCategories"
-            [placeholder]="'Add Product Categories'"
-            [settings]="dropdownSettings"
-            [data]="dropdownList"
-            (onSelect)="onItemSelect($event)">
-        </ng-multiselect-dropdown> -->
 
-
-        <!-- <div class="row">
+        <div class="row">
             <div class="col" style=" padding: 0;">
-                <label for="productCategory"> <b> Product Category 1</b> </label>
-                <select class="form-select" formControlName="productCategory" id="productCategory">
-                    <option value="Electronics">Electronics</option>
-                    <option value="Home">Home</option>
-                    <option value="Grocieries">Grocieries</option>
-                    <option value="Fashion">Fashion</option>
-                </select>
-                <input class="form-control" type="text" id="productCategory" formControlName="productCategory"
-                    [ngClass]="{ 'is-invalid': (f['productCategory'].touched || submitted)&& f['productCategory'].invalid }">
+                <label for="productProperties"> <b> Product Properties </b> </label>
+                <textarea class="form-control" type="text" id="productProperties" formControlName="productProperties" placeholder="Enter Product Properties Separated by comma ( , )"
+                    [ngClass]="{ 'is-invalid': (f['productProperties'].touched || submitted)&& f['productProperties'].invalid }">
+                </textarea>
 
-                <div
-                    [ngClass]="{ 'd-none': (f['productCategory'].untouched && !submitted) || f['productCategory'].valid}">
-                    <small class="text-danger" *ngIf="f['productCategory'].errors?.['required']">
-                        product category Cannot be blank
-                    </small>
+                <div [ngClass]="{ 'd-none': (f['productProperties'].untouched && !submitted) || f['productProperties'].valid}">
+                    <small class="text-danger" *ngIf="f['productProperties'].errors?.['required']">
+                        Product Properties Cannot be blank
+                    </small>   
                 </div>
             </div>
-        </div> -->
+        </div>
+
+        
 
 
         <div class="row">

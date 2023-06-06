@@ -20,6 +20,9 @@ import { UpdateProductReviewComponent } from './update-product-review/update-pro
 import { ViewProductReviewComponent } from './view-product-review/view-product-review.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ViewProductsComponent } from './view-products/view-products.component';
+import { FindFriendsComponent } from './find-friends/find-friends.component';
+import { ViewFriendProductRecommendationsComponent } from './view-friend-product-recommendations/view-friend-product-recommendations.component';
+import { SellerGuard } from './Guards/sellerGuard';
 
 const routes: Routes = [
   {path:"", component:HomeComponent}, 
@@ -27,7 +30,7 @@ const routes: Routes = [
   {path:"signin", component:SigninComponent},
   {path:"sellerSignup", component:SellerSignupComponent},
   {path:"sellerSignin", component:SellerSigninComponent},
-  {path:"sellerHome", component:SellerHomeComponent}, 
+  {path:"sellerHome", component:SellerHomeComponent, canActivate: [SellerGuard]}, 
   {path:"addProducts", component:AddProductsComponent}, 
   {path:"sellerDashboard", component: SellerDashboardComponent},
   {path:"viewCategory/:category", component:ViewCategoryComponent}, 
@@ -40,7 +43,9 @@ const routes: Routes = [
   {path:"updateProductReview", component:UpdateProductReviewComponent}, 
   {path:"viewProductReview", component:ViewProductReviewComponent},
   {path:"updateProduct", component:UpdateProductComponent},
-  {path:"viewProducts", component:ViewProductsComponent}
+  {path:"viewProducts", component:ViewProductsComponent}, 
+  {path: "findFriends", component:FindFriendsComponent},
+  {path: "viewFriendProductRecommendations", component:ViewFriendProductRecommendationsComponent}
 ];
 
 @NgModule({

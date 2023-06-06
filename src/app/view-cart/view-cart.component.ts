@@ -26,7 +26,8 @@ export class ViewCartComponent {
   subTotal = 0;
 
   idInCart: Map<string, boolean> = new Map();
-  productSelected: Map<string, boolean> = new Map();
+  productSelected: Map<string, boolean> = new Map(); 
+  productPrice: Map<string, number> = new Map();
   
 
 
@@ -40,7 +41,6 @@ export class ViewCartComponent {
         quantity: ['1', Validators.required]
       })      
   }
-
 
 
 
@@ -82,7 +82,8 @@ export class ViewCartComponent {
       }
       if(this.productSelected.get(product._id)==true) {
         this.productsSelectedForBuying.push(product);
-        this.subTotal += product.sellingPrice
+        this.subTotal += product.sellingPrice 
+        this.productPrice.set(product._id, product.sellingPrice);
       }
     }
     console.log("Products in Cart: ", this.productsInCart);
@@ -104,13 +105,24 @@ export class ViewCartComponent {
 
 
   updateSelectedForBuying(cartItem: CartItem) {
+    console.log("cartiem: ", cartItem);
+    
     for(let it of this.cartItems) {
       if(it.productId == cartItem.productId) {
-        it.selectedForBuying = cartItem.selectedForBuying;
+        it.selectedForBuying = cartItem.selectedForBuying; 
+        
+        let price = this.productPrice.get(cartItem.productId); 
+        if(price) {
+          if(cartItem.selectedForBuying) {
+            this.subTotal += price;
+          } else {
+            this.subTotal -= price;
+          }
+        }
       }
     }
     this.cartService.updateCart(this.cart).subscribe(data => {});
-    window.location.reload();
+    // window.location.reload();
   }
 
 
@@ -128,17 +140,17 @@ export class ViewCartComponent {
   
     let removed = cartItems.splice(pos, 1);
 
-    console.log("Removed item: ", removed);
+    console.log("Removed item: ", this.productSelected[removed[0]]);
     console.log("CartItems after splice:", cartItems);
     
     this.updatedCart._id = cartItem.customerId;
     this.updatedCart.cartItems = cartItems;
     
-    this.cartService.updateCart(this.updatedCart).subscribe(data => {
+    // this.cartService.updateCart(this.updatedCart).subscribe(data => {
 
-    })
+    // })
 
-    window.location.reload()
+    // window.location.reload()
   }
 
 

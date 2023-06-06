@@ -14,5 +14,6 @@ type Product struct {
 	ProductCategories	[]string 	`json:"productCategories" bson:"productCategories"`
 	AverageRating		int 		`json:"averageRating" bson:"averageRating"`
 	ProductImages 		[]string 	`json:"productImages" bson:"productImages"`
+	ProductProperties 	[]string 	`json:"productProperties" bson:"productProperties"`
 	Reviews				[]Review	`json:"reviews" bson:"reviews"`
 }

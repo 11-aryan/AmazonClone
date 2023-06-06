@@ -45,6 +45,7 @@ export class UpdateProductComponent {
       sellingPrice: ['', Validators.required], 
       productCategories: ['', Validators.required],       
       quantity: ['', Validators.required], 
+      productProperties: ['', Validators.required],
     })
   }
 
@@ -108,15 +109,15 @@ export class UpdateProductComponent {
       "Books", 
       "Art", 
       "Garden", 
-      "Mobile Phones", 
+      "Mobile_Phones", 
       "Electronics Accessories", 
       "Mobile Phone Accessories", 
       "Headphones", 
       "Appliances", 
-      "Pet Supplies", 
+      "Pet_Supplies", 
       "Baby", 
       "Tools", 
-      "Office Supplies", 
+      "Office_Supplies", 
       "Watches"
     ]
   }
@@ -134,6 +135,7 @@ export class UpdateProductComponent {
     const productToBeUpdated: Product = this.getProductDataFromForm();
     productToBeUpdated._id = this.productId;
     productToBeUpdated.productImages = this.productImages;
+    productToBeUpdated.productCategories.push("All");
 
     console.log("Product to be added: ", productToBeUpdated);
     
@@ -156,7 +158,11 @@ export class UpdateProductComponent {
     this.updateProductForm.get("maxRetailPrice")?.setValue(product.maxRetailPrice);
     this.updateProductForm.get("sellingPrice")?.setValue(product.sellingPrice);
     this.updateProductForm.get("quantity")?.setValue(product.quantity);
+    this.updateProductForm.get("productProperties")?.setValue(product.productProperties.join(','));
     this.productImages = product.productImages
+
+    console.log("images: ", this.productImages);
+    
 
     let categories:string[] = product.productCategories
 
@@ -171,7 +177,7 @@ export class UpdateProductComponent {
 
   private getProductDataFromForm():Product {
     const formValue = this.updateProductForm.value;
-    const product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], []);
+    const product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], [], []);
     
     console.log("Seller id from LS: ", localStorage.getItem('sellerId'));
     
@@ -182,7 +188,11 @@ export class UpdateProductComponent {
     product.maxRetailPrice = formValue.maxRetailPrice;
     product.sellingPrice = formValue.sellingPrice;
     product.quantity = formValue.quantity;
-    product.productCategories = formValue.productCategories;
+    product.productCategories = formValue.productCategories; 
+    product.productProperties = formValue.productProperties.split(',')
+    for(let i=0; i<product.productProperties.length; i++) {
+      product.productProperties[i]= product.productProperties[i].toLowerCase().trim();
+    }
 
     return product;
   }

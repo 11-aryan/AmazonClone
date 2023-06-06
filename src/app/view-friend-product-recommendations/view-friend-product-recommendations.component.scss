@@ -1,0 +1,36 @@
+#productImage {
+    height: 250px;
+    width: 300px;
+    margin: 5% 0 0% 24%;
+}
+
+.productContainer {
+    border-style: solid;
+    border-color: rgb(206, 202, 202);
+    border-width: 1px;
+    margin: 5% 0 5% 27%;
+    text-align: center;
+    height: 450px;
+    width: 600px;
+    padding: 20px;
+}
+
+#removeProductBtn {
+    color: red;
+    font-size: 17px;
+    font-weight: 550;
+    margin: 5% 0 5% 0;
+}
+
+.productActionBtn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+#viewProductBtn {
+    color: rgb(77, 98, 166);
+    font-size: 17px;
+    font-weight: 550;
+    margin: 5% 0 5% 0;
+}

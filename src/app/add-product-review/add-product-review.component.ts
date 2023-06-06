@@ -13,7 +13,7 @@ import { ReviewService } from '../Services/review.service';
 })
 export class AddProductReviewComponent {
 
-  product: Product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], []);
+  product: Product = new Product("", "", "", "", "", [], 0, 0, 0, 0, 0, [], [], []);
   reviewForm: FormGroup;  
   submitted = false;
   customerId = "";

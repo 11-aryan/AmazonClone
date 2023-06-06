@@ -5,13 +5,13 @@
   <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="d-block w-100" src="../../assets/Images/Products/carouselImg1.jpg" alt="First slide">
+        <img class="d-block w-100" src="../../assets/Images/Products/carouselImg1.jpg" alt="First slide" (click)="viewProducts('Watches')">
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="../../assets/Images/Products/carouselImg2.jpg" alt="Second slide">
+        <img class="d-block w-100" src="../../assets/Images/Products/carouselImg2.jpg" alt="Second slide" (click)="viewProducts('Groceries')">
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="../../assets/Images/Products/carouselImg3.jpg" alt="Third slide">
+        <img class="d-block w-100" src="../../assets/Images/Products/carouselImg3.jpg" alt="Third slide" (click)="viewProducts('Fashion')">
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -34,40 +34,32 @@
 
         <div class="blog_item"> 
           <h4 class="topRowCardHeading">Great Summer Sale</h4>
-          <a href="#">
-            <div class="bi_img" style="height: 100%; padding: 0;">
-              <img src="../../assets/Images/HomePage/greatSummerSale.jpg">
-            </div>
-          </a>
+          
+          <div class="bi_img" style="height: 100%; padding: 0;">
+            <img src="../../assets/Images/HomePage/greatSummerSale.jpg"  (click)="viewProducts('Electronics')">
+          </div>
+          
         </div>
 
 
-        <div class="blog_item">
+        <div class="blog_item" (click)="viewProducts('Mobile_Phones')">
           <h4 class="topRowCardHeading">Smartphones that suit  your budget</h4>
           <div class="row">
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesBudget.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesBudget.jpg" (click)="viewProducts('Mobile_Phones')"></div>
             </div>
             
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesMid.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesMid.jpg" (click)="viewProducts('Mobile_Phones')"></div>
             </div>
           </div>
 
           <div class="row">
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesPremium.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesPremium.jpg" (click)="viewProducts('Mobile_Phones')"></div>
             </div>
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesUltraPremium.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/smartPhonesUltraPremium.jpg" (click)="viewProducts('Mobile_Phones')"></div>
             </div>
           </div>
           
@@ -75,32 +67,24 @@
         </div>
 
 
-        <div class="blog_item">
+        <div class="blog_item"  (click)="viewProducts('Home')">
           <h4 class="topRowCardHeading">Starting ₹79 | Home, kitchen & more</h4>
           <div class="row">
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/kitchen.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/kitchen.jpg"  (click)="viewProducts('Home')"></div>
             </div>
             
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/homeDecor.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/homeDecor.jpg"  (click)="viewProducts('Home')"></div>
             </div>
           </div>
 
           <div class="row">
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/furniture.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/furniture.jpg"  (click)="viewProducts('Home')"></div>
             </div>
             <div class="col" style="height:150px; padding: 0;">
-              <a href="#">
-                <div class="bi_img"><img src="../../assets/Images/HomePage/homeImprovement.jpg"></div>
-              </a>
+                <div class="bi_img"><img src="../../assets/Images/HomePage/homeImprovement.jpg"  (click)="viewProducts('Home')"></div>
             </div>
           </div>
           
@@ -132,3 +116,5 @@
   </div>
 
 </div>
+
+<app-footer></app-footer>

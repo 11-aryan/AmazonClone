@@ -54,7 +54,7 @@ export class SellerSigninComponent {
         alert("Loggged in successfully")
         localStorage.setItem('sellerId', element._id);
 
-        this.router.navigate(['/sellerHome'])
+        this.router.navigate(['/sellerDashboard'])
       }
     })
 

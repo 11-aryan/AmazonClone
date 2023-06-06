@@ -16,6 +16,9 @@ export class OrdersComponent {
   orders:Order[] = [];
   customerId = localStorage.getItem("customerId");
   subscriptions:Subscription[] = [];
+  paymentMethodUsed: string = "";
+
+  productMap: Map<string, Product> = new Map();
 
   constructor(
     private orderService: OrderService, 
@@ -34,22 +37,20 @@ export class OrdersComponent {
     let getOrdersSubs = this.orderService.getOrdersByCustomerId(this.customerId).subscribe(data => {
       this.orders = data;
       console.log("Orders: ", this.orders);
+
+      for(let order of this.orders) {
+        this.productService.getProductById(order.productId).subscribe(data => {
+          this.productMap.set(data._id, data);
+        })
+      }
       
     })
 
     this.subscriptions.push(getOrdersSubs);
   }
 
-  getProduct(productId: string) {
-    let product: Product = new Product("", "", "", "", "", [], NaN, 0, 0, 0, 0, [], []);
-    
-    let getProductSubs = this.productService.getProductById(productId).subscribe(data => {
-      product = data;
-    })
-
-    this.subscriptions.push(getProductSubs);
-
-    return product;
+  getProductFromCache(productId: string) {
+    return this.productMap.get(productId);
   }
 
   ngOnDestroy() {
@@ -69,15 +70,21 @@ export class OrdersComponent {
     this.router.navigate(['/viewProductReview'], { queryParams: { productId: productId, customerId: this.customerId } })
   }
 
+  viewProductDetails(productId: string) {
+    this.router.navigate(['viewProductDetails/' + productId]);
+  }
+
   // updateProductReview(productId: string) {
   //   this.router.navigate(['/updateProductReview'], { queryParams: { productId: productId, customerId: this.customerId } })
   // }
   
   reviewExists(productId: string, customerId: string) {
-    let curProduct: Product = this.getProduct(productId);
-    for(let review of curProduct.reviews) {
-      if(review.customerId == customerId) {
-        return true;
+    let curProduct = this.getProductFromCache(productId);
+    if(curProduct) {
+      for(let review of curProduct.reviews) {
+        if(review.customerId == customerId) {
+          return true;
+        }
       }
     }
     return false;

@@ -18,13 +18,77 @@
 
     <div class="row">
         <!-- <h1>{{productsCategory}}</h1> -->
-        <div class="col-2" style=" margin-left: 1%; background-color: rgb(248, 248, 239); height: 500px;">
+        <div class="col-2" style=" margin-left: 1%; background-color: rgb(255, 255, 255); height: 500px;" *ngIf="categoryDetails!=null">
+            <span class="filterLabel" id="priceLabel" >Price: </span> <br>
 
+            <div *ngFor="let priceRange of categoryDetails.priceRanges">
+                <span class="filterText" (click)="getProductsByPriceRangeString(priceRange)">{{priceRange | priceRange}}</span> <br>
+            </div>
+
+            <div class="row">
+                <input type="text" class="form-control priceRangeInput" placeholder="Min" style="margin-left: 5%;" [(ngModel)]="minPriceSelected">
+                <input type="text" class="form-control priceRangeInput" placeholder="Max" [(ngModel)]="maxPriceSelected">
+                <button class="btn btn-light" id="priceRangeBtn" (click)="getCustomPriceRangeFilteredProducts()">Go</button>
+            </div>
+
+
+            <div *ngIf="categoryDetails.brands.length">
+                <br>
+                <span class="filterLabel" id="priceLabel" >Brand: </span> <br>
+                <div *ngFor="let brand of categoryDetails.brands">
+                    <input class="filterText" 
+                            type="checkbox" 
+                            id="" 
+                            value="{{brand}}"
+                            (change)="toggleProductPropertyFilter($event)"
+                    > {{brand}}
+                </div>
+            </div>
+
+
+            <div *ngIf="categoryDetails.sellerIds.length">
+                <br>
+                <span class="filterLabel" id="priceLabel" >Seller: </span> <br>
+                <div *ngFor="let sellerId of categoryDetails.sellerIds">
+                    <input class="filterText" 
+                            type="checkbox" 
+                            name="" id="" 
+                            value="{{sellerIdMap.get(sellerId)?.firstName}}"
+                            (change)="toggleProductPropertyFilter($event)"
+                    > {{sellerIdMap.get(sellerId)?.firstName}}
+                </div>
+            </div>
+
+
+            <div *ngIf="productProperties!=null">
+                <div *ngFor="let productProperty of productProperties">
+                    <br>
+                    <span class="filterLabel" id="priceLabel" >{{productProperty}}: </span> <br>
+                    <div *ngFor="let propertyValue of productPropertiesMap[productProperty]">
+                        <input value="{{propertyValue}}-{{productProperty}}" 
+                                class="filterText" 
+                                type="checkbox" 
+                                name="" 
+                                id="" 
+                                (change)="toggleProductPropertyFilter($event)"
+                        > {{propertyValue}}
+                    </div>
+                </div>
+            </div>
+
+            <br> <br> <br>
         </div>
+
+
         <div class="col">
 
             <div class="container" (scroll)="onScroll()">
-                <div class="product-list">
+
+                <div *ngIf="noProductsFound">
+                    <h3 style="margin: 5% 0 0 30%">No products found</h3>
+                </div>
+
+                <div class="product-list" *ngIf="!noProductsFound">
 
                     <div class="row">
 
@@ -77,8 +141,11 @@
 
             </div>
 
-
         </div>
+
+        
+
+
     </div>
 
 </div>

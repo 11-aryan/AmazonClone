@@ -166,8 +166,8 @@ func CreateCustomer(w http.ResponseWriter, r *http.Request) {
         // fmt.Println(customer)
         // customer["_id"] = customer["id"]
 
-        // s := customer["password"].(string)
-        // customer["password"] = hex.EncodeToString(encrypt([]byte(s), "RandomHash"))
+        s := customer["password"].(string)
+        customer["password"] = hex.EncodeToString(encrypt([]byte(s), "RandomHash"))
 
         delete(customer, "_id")
         // fmt.Println("after: ", customer)
@@ -215,6 +215,9 @@ func UpdateCustomer(w http.ResponseWriter, r *http.Request) {
                 {Key: "role", Value: customer.Role},
                 {Key: "productsPurchased", Value: customer.ProductsPurchased},
                 {Key: "addresses", Value: customer.Addresses},
+                {Key: "friendRequests", Value: customer.FriendRequests},
+                {Key: "friends", Value: customer.Friends},
+                {Key: "friendProductRecommendations", Value: customer.FriendProductRecommendations},
 			}},
 		}
 
@@ -231,4 +234,53 @@ func UpdateCustomer(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(customer)
 	}
+}
+
+
+func GetCustomersByEmail(w http.ResponseWriter, r *http.Request) {
+    fmt.Println("\n\t\t\tGet customers by email called");
+	generic.SetupResponse(&w, r)
+
+	w.Header().Set("Content-Type", "application/json")
+	collection := connection.ConnectDB("customers")
+
+	var customers []model.Customer
+
+    customerEmail := r.URL.Query().Get("customerEmail");
+
+    fmt.Println("\n\tCustomer email in query: ", customerEmail)
+
+	filter := bson.M{
+        "email": bson.M{
+            "$regex":   customerEmail,
+            "$options": "i", 
+        },
+    }
+
+    // fmt.Println("filter: ", filter)
+
+	cur, err := collection.Find(context.TODO(), filter)
+    if err != nil {
+        connection.GetError(err, w)
+        return
+    }
+    defer cur.Close(context.TODO())
+
+    for cur.Next(context.TODO()) {
+        var customer model.Customer
+        err := cur.Decode(&customer)
+        if err != nil {
+            connection.GetError(err, w)
+            return
+        }
+		fmt.Println("customers filtered: ", customer);
+        customers = append(customers, customer)
+    }
+
+    if err := cur.Err(); err != nil {
+        connection.GetError(err, w)
+        return
+    }
+
+    json.NewEncoder(w).Encode(customers)
 }

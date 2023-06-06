@@ -12,6 +12,7 @@ import { Order } from '../Models/order';
 import { ProductService } from '../Services/product.service';
 import { Product } from '../Models/product';
 import { Subscription } from 'rxjs';
+import { CartItem } from '../Models/cartItem';
 
 @Component({
   selector: 'app-checkout',
@@ -21,11 +22,12 @@ import { Subscription } from 'rxjs';
 export class CheckoutComponent {
 
   cart: Cart = new Cart("", []);
-  customer: Customer = new Customer("", "", "", "", "", new Date(), "", "", [], []);
+  customer: Customer = new Customer("", "", "", "", "", new Date(), "", "", [], [], [], [], []);
   addresses: Address[] = [];
   addressSelected: Address = new Address("", "", "", "", "", "", "", "", "");
   paymentMethodSelected: string = "";
   subscriptions:Subscription[] = [];
+  cartItemsSelectedForBuying: CartItem[] = [];
   
   paymentForm:FormGroup;
 
@@ -63,6 +65,13 @@ export class CheckoutComponent {
       this.cartService.getCartById(cartId).subscribe(data => {
         this.cart = data;
         console.log("Cart: ", this.cart);
+
+        for(let cartItem of this.cart.cartItems) {
+          if(cartItem.selectedForBuying) {
+            this.cartItemsSelectedForBuying.push(cartItem);
+          }
+        }
+
       });
 
 
@@ -121,32 +130,40 @@ export class CheckoutComponent {
       return;
     }
 
-
     console.log("payment: ", this.paymentForm.value);
-    console.log("Cart items: ", this.cart);
+    console.log("Cart items: ", this.cart.cartItems);
 
-    for(let cartItem of this.cart.cartItems) {
-      let productId = cartItem.productId;
-      if(!cartItem.selectedForBuying) continue; 
+    for(let i=0; i<this.cartItemsSelectedForBuying.length; i++) {
+      let productId = this.cartItemsSelectedForBuying[i].productId;
+
+      if(!this.cartItemsSelectedForBuying[i].selectedForBuying) {
+        continue;
+      }
 
       let getProductSubs = this.productService.getProductById(productId).subscribe(data => {
-        this.createNewOrder(data);
+        let product = data; 
+        this.createNewOrder(data, this.cartItemsSelectedForBuying[i].quantityInCart);
+        this.updateProductQuantity(product, this.cartItemsSelectedForBuying[i].quantityInCart);
       })
-
       this.subscriptions.push(getProductSubs);
-      
+    
+      this.cart.cartItems.splice(i, 1);
     }
 
+    this.cartService.updateCart(this.cart).subscribe(data=> {
+
+    })
     
-    alert("Order placed successfully");
+    // alert("Order placed successfully");
+    // this.router.navigate(['/orders']);
 
   }
 
 
-  createNewOrder(newProduct: Product) {
+  createNewOrder(newProduct: Product, quantity: number) {
 
     let paymentDetails: Payment = new Payment("", this.paymentMethodSelected, 0, "", "", "", "", "");
-    let newOrder:Order = new Order("", "", "", new Date(), undefined, "", this.addressSelected, paymentDetails, 0); 
+    let newOrder:Order = new Order("", "", "", new Date(), quantity, undefined, "", this.addressSelected, paymentDetails, 0); 
 
     newOrder.customerId = this.cart._id;
     newOrder.productId = newProduct._id;
@@ -157,18 +174,26 @@ export class CheckoutComponent {
       paymentDetails.cardNumber = this.paymentForm.value.cardNumber;
       paymentDetails.nameOnCard = this.paymentForm.value.nameOnCard;
       paymentDetails.cardExpiryDate = this.paymentForm.value.cardExpiryMonth + "/" + this.paymentForm.value.cardExpiryYear
-      
     } else if(this.paymentMethodSelected=="upiPayment") {
       paymentDetails.upiId = this.paymentForm.value.upiId;
     }
     
     let addOrderSubs = this.orderService.addOrder(newOrder).subscribe(data => {
-      
     });
 
     this.subscriptions.push(addOrderSubs);
     
     console.log("Adding order: ", newOrder);
+  }
+
+
+  updateProductQuantity(product: Product, quantitySelected: number) {
+    product.quantity -= quantitySelected;
+    product.unitsSold += quantitySelected; 
+    console.log("Updating product qantity: ", product);
+    this.productService.updateProduct(product).subscribe(data => {
+
+    })
   }
 
 

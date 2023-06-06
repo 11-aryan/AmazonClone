@@ -82,19 +82,46 @@ export class ProductService {
   }
 
 
-  getPaginatedProducts(pageNumber: number, pageSize: number, productCategories: string[], sortVal: number): Observable<{ data: Product[], totalCount: number }> {
-    const params = new HttpParams()
-        .set('pageNumber', pageNumber.toString())
-        .set('productCategories', productCategories.join(','))
-        .set('pageSize', pageSize.toString())
-        .set('sortVal', sortVal.toString());
+  getPaginatedProducts(
+    pageNumber: number,
+    pageSize: number,
+    productCategories: string[],
+    sortVal: number,
+    minPrice: number = 0,
+    maxPrice: number = 0,
+    productProperties: string[] = []
+  ): Observable<{ data: Product[], totalCount: number }> {
+  
+    const url = this.baseUrl + '/pagination/products';
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    let skip: number = (pageNumber - 1) * pageSize ;
+    let limit: number = pageSize;
+    if(sortVal!=1 && sortVal!=-1) {
+      sortVal = 1;
+    }
     
-    return this.httpClient.get<{ data: Product[], totalCount: number }>(this.baseUrl + '/pagination/products', { params })
-        .pipe(
-            retry(1),
-            catchError(this.httpError)
-        );
-  } 
+
+    const requestBody = {
+      skip,
+      limit, 
+      productCategories,
+      sortVal,
+      minPrice,
+      maxPrice,
+      productProperties
+    };
+    
+    console.log("POST request body: ", requestBody);
+    
+
+    return this.httpClient.post<{ data: Product[], totalCount: number }>(url, requestBody, { headers })
+      .pipe(
+        retry(1),
+        catchError(this.httpError)
+      );
+  }
+   
 
 
   getProductsByProductName(productName: string): Observable<Product[]>  {
@@ -110,3 +137,34 @@ export class ProductService {
 
   
 }
+
+
+
+// Getting data with GET method
+// getPaginatedProducts(
+//   pageNumber: number, 
+//   pageSize: number, 
+//   productCategories: string[], 
+//   sortVal: number, 
+//   minPrice: number=0, 
+//   maxPrice: number=0, 
+//   productProperties: string[] = []
+// ): Observable<{ data: Product[], totalCount: number }> {
+
+// console.log("minprice: ", minPrice, " maxprice: ", maxPrice);
+
+// const params = new HttpParams()
+//     .set('pageNumber', pageNumber.toString())
+//     .set('productCategories', productCategories.join(','))
+//     .set('pageSize', pageSize.toString())
+//     .set('sortVal', sortVal.toString())
+//     .set('minPrice', minPrice.toString())
+//     .set('maxPrice', maxPrice.toString())
+//     .set('productProperties', productProperties.join(','));
+
+// return this.httpClient.get<{ data: Product[], totalCount: number }>(this.baseUrl + '/pagination/products', { params })
+//     .pipe(
+//         retry(1),
+//         catchError(this.httpError)
+//     );
+// }

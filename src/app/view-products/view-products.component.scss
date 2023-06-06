@@ -108,3 +108,31 @@
     // left: 800px;
 }
 
+.filterLabel {
+    font-size: 15px;
+    font-weight: 580;
+}
+
+.fliterText {
+    font-size: 14px;
+}
+
+.filterText:hover {
+    color: orangered;
+    cursor: pointer;
+}
+
+.priceRangeInput {
+    width: 25%;
+    height: 60%;
+    margin: 2% 0% 0 2%;
+}
+
+#priceRangeBtn {
+    width: 20%;
+    height: 65%;
+    border-style: solid;
+    border-color: black;
+    margin: 2% 0 0 2%; 
+    font-size: 12px;
+}

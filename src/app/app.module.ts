@@ -29,6 +29,10 @@ import { UpdateProductReviewComponent } from './update-product-review/update-pro
 import { ViewProductReviewComponent } from './view-product-review/view-product-review.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ViewProductsComponent } from './view-products/view-products.component';
+import { PriceRangePipe } from './Pipes/price-range.pipe';
+import { FindFriendsComponent } from './find-friends/find-friends.component';
+import { ViewFriendProductRecommendationsComponent } from './view-friend-product-recommendations/view-friend-product-recommendations.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -56,7 +60,11 @@ import { ViewProductsComponent } from './view-products/view-products.component';
     UpdateProductReviewComponent,
     ViewProductReviewComponent,
     UpdateProductComponent,
-    ViewProductsComponent
+    ViewProductsComponent,
+    PriceRangePipe,
+    FindFriendsComponent,
+    ViewFriendProductRecommendationsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
